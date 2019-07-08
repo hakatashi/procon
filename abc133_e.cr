@@ -21,7 +21,8 @@ def search_by(node : Int32, parent : Int32, depth : Int32, adjs : Array(Set(Int3
         return 0
       end
       n = search_by(adj, node, depth + 1, adjs, k)
-      ret = (ret * n * (k - i)) % 1000000007
+      ret = (ret * n) % 1000000007
+      ret = (ret * (k - i)) % 1000000007
       i += 1
     end
   end
