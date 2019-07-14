@@ -1,5 +1,5 @@
 if [ "$1" -nt a.out ]; then
-	crystal build "$1" -o a.out -p || exit
+	/usr/local/share/crystal-0.20.5-1/bin/crystal build "$1" -o a.out || exit
 fi
 if [ ! -f in.txt ]; then
 	touch in.txt
