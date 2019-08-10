@@ -11,7 +11,7 @@ if [[ ! `cat /usr/bin/sensible-browser` =~ '"${BROWSER}"' ]]; then
 fi
 
 if [ "${filename##*.}" = ".cpp" ]; then
-  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" ~/.pyenv/shims/oj submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language C++14
+  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" ~/.pyenv/shims/oj submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language C++14 --yes
 else
-  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" ~/.pyenv/shims/oj submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language Crystal
+  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" ~/.pyenv/shims/oj submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language Crystal --yes
 fi

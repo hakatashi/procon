@@ -1,6 +1,15 @@
 filename="$1"
-./.vscode/build.sh "$filename"
-if [ ! -f in.txt ]; then
-	touch in.txt
+sample="test/sample-$2.in"
+./.vscode/build.sh "$filename" || exit 1
+
+if [ ! -f "$sample" ]; then
+  echo "$sample not exists"
+  exit 1
 fi
-./a.out < in.txt | tee out.txt
+
+echo "=== Input ==="
+cat "$sample"
+echo ""
+
+echo "=== Output ==="
+./a.out < "$sample" | tee out.txt

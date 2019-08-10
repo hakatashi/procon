@@ -69,13 +69,21 @@
         "cwd": "${workspaceRoot}"
       },
       "args": [
-        "${fileBasename}"
+        "${fileBasename}",
+        "${input:sample-no}"
       ],
       "group": "build",
       "presentation": {
         "reveal": "silent"
       },
       "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "sample-no",
+      "description": "Sample No. to run:",
+      "type": "promptString"
     }
   ]
 }
