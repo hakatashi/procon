@@ -1,0 +1,81 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Download",
+      "type": "shell",
+      "command": "./.vscode/download.sh",
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "cwd": "${workspaceRoot}"
+      },
+      "args": [
+        "${fileBasenameNoExtension}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "./.vscode/test.sh",
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "cwd": "${workspaceRoot}"
+      },
+      "args": [
+        "${fileBasename}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Submit",
+      "type": "shell",
+      "command": "./.vscode/submit.sh",
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "cwd": "${workspaceRoot}"
+      },
+      "args": [
+        "${fileBasename}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run",
+      "type": "shell",
+      "command": "./.vscode/run.sh",
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "cwd": "${workspaceRoot}"
+      },
+      "args": [
+        "${fileBasename}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

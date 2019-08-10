@@ -1,2 +1,2 @@
-a = read_line.to_u64
+a = read_line.to_i
 puts a * a * 3
