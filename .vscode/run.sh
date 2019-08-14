@@ -12,4 +12,8 @@ cat "$sample"
 echo ""
 
 echo "=== Output ==="
-./a.out < "$sample" | tee out.txt
+if [ -d /usr/local/share/crystal-0.20.5 ]; then
+  ./a.out < "$sample" | tee out.txt
+else
+  docker run -v "$PWD":/mnt -i crystallang/crystal:0.20.5 /mnt/a.out < $sample | tee out.txt
+fi
