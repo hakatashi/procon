@@ -6,10 +6,14 @@
       "type": "shell",
       "command": "./.vscode/download.sh",
       "options": {
-        "shell": {
-          "executable": "C:\\Windows\\System32\\wsl.exe"
-        },
         "cwd": "${workspaceRoot}"
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\wsl.exe"
+          }
+        }
       },
       "args": [
         "${fileBasenameNoExtension}"
@@ -25,10 +29,14 @@
       "type": "shell",
       "command": "./.vscode/test.sh",
       "options": {
-        "shell": {
-          "executable": "C:\\Windows\\System32\\wsl.exe"
-        },
         "cwd": "${workspaceRoot}"
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\wsl.exe"
+          }
+        }
       },
       "args": [
         "${fileBasename}"
@@ -44,10 +52,14 @@
       "type": "shell",
       "command": "./.vscode/submit.sh",
       "options": {
-        "shell": {
-          "executable": "C:\\Windows\\System32\\wsl.exe"
-        },
         "cwd": "${workspaceRoot}"
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\wsl.exe"
+          }
+        }
       },
       "args": [
         "${fileBasename}"
@@ -63,10 +75,14 @@
       "type": "shell",
       "command": "./.vscode/run.sh",
       "options": {
-        "shell": {
-          "executable": "C:\\Windows\\System32\\wsl.exe"
-        },
         "cwd": "${workspaceRoot}"
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\wsl.exe"
+          }
+        }
       },
       "args": [
         "${fileBasename}",
