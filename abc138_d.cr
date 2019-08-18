@@ -10,7 +10,7 @@ q.times do
   p_, x = read_line.split.map(&.to_u64)
   counters[p_ - 1] += x
 end
-def search(node : UInt64, sum : UInt64, children : Array(Array(UInt64)), counters : Array(UInt64), rets : Array(UInt64))
+def search(node, sum, children, counters, rets)
   sum += counters[node]
   rets[node] = sum
   children[node].each do |child|
