@@ -1,3 +1,5 @@
+# -*- mode: float -*-
+
 gets
 sign = 1
 area = 0.0

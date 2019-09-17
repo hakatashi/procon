@@ -21,7 +21,7 @@ def invmod(e, et)
 end
 
 
-MOD = 1e9
+MOD = 1000000007
 
 n, k = read_line.split.map(&.to_u64)
 ais = read_line.split.map(&.to_u64)

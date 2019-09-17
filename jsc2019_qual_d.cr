@@ -1,3 +1,5 @@
+# -*- stutus: skip -*-
+
 n = read_line.to_i
 r = Array.new(n) { Array.new(n, 0) }
 def colorize(lower, upper, depth, r)

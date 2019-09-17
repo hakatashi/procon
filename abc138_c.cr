@@ -1,3 +1,5 @@
+# -*- mode: float -*-
+
 gets
 ais = read_line.split.map(&.to_f)
 ais.sort!
