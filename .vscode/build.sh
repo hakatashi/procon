@@ -10,6 +10,8 @@ else
     echo "Building Crystal project ${filename}..."
     if [ -d /usr/local/share/crystal-0.20.5-1 ]; then
       /usr/local/share/crystal-0.20.5-1/bin/crystal build "$filename" -o a.out --error-trace || exit 1
+    elif [ -d /tmp/crystal-0.20.5-1 ]; then
+      /tmp/crystal-0.20.5-1/bin/crystal build "$filename" -o a.out --error-trace || exit 1
     else
       docker run -v "$PWD":/mnt crystallang/crystal:0.20.5 crystal build "/mnt/$filename" -o /mnt/a.out --error-trace || exit 1
     fi
