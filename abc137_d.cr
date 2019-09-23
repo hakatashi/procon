@@ -1,71 +1,76 @@
-# Skew heap
-class Heap(T)
-  property left : Heap(T)?, right : Heap(T)?, value : T?
-
-  def initialize(v : T?)
-    @value = v
-    @left = nil
-    @right = nil
-  end
-
-  def self.meld(a : Heap(T)?, b : Heap(T)?)
-    return Heap(T).new(nil) if a.nil? && b.nil?
-    return b.not_nil! if a.nil? || a.value.nil?
-    return a.not_nil! if b.nil? || b.value.nil?
-    a, b = [a, b].sort_by(&.value.not_nil!)
-    a.right = Heap.meld(a.right, b)
-    a.right, a.left = a.left, a.right
-    a
-  end
-end
+# PriorityQueue.cr by Koki Takahashi
+# Licensed under MIT License
 
 class PriorityQueue(T)
-  property size : Int32
+  property heap : Array(T)
 
-  def initialize
-    @heap = Heap(T).new(nil)
-    @size = 0
+  def initialize(n : Int32)
+    @heap = Array(T).new(n)
   end
 
-  def <<(value : T)
-    push(value)
+  def push(v : T)
+    @heap << v
+    index = @heap.size - 1
+    while index != 0
+      parent = (index - 1) / 2
+      if @heap[parent] >= @heap[index]
+        break
+      end
+      @heap[parent], @heap[index] = @heap[index], @heap[parent]
+      index = parent
+    end
   end
 
-  def push(value : T)
-    @heap = Heap.meld(@heap, Heap.new(value))
-    @size += 1
+  def <<(v : T)
+    push(v)
   end
 
   def pop
-    ret = @heap.value
-    @heap = Heap.meld(@heap.right, @heap.left)
-    @size -= 1 unless ret.nil?
+    if @heap.size == 0
+      return nil
+    end
+    if @heap.size == 1
+      return @heap.pop
+    end
+    ret = @heap.first
+    @heap[0] = @heap.pop
+    index = 0
+    while index * 2 + 1 < @heap.size
+      child = if index * 2 + 2 < @heap.size && @heap[index * 2 + 1] < @heap[index * 2 + 2]
+        index * 2 + 2
+      else
+        index * 2 + 1
+      end
+      if @heap[index] >= @heap[child]
+        break
+      end
+      @heap[child], @heap[index] = @heap[index], @heap[child]
+      index = child
+    end
     ret
   end
+
+  delegate :empty?, to: @heap
 end
 
 
 
-
-n, m = read_line.split.map(&.to_u64)
-js = [] of NamedTuple(a: Int64, b: Int64)
-q = PriorityQueue(Int64).new
-STDIN.gets_to_end.lines.each do |line|
-  a, b = line.split.map(&.to_i64)
-  js << {a: a, b: b}
+n, m = read_line.split.map(&.to_i)
+q = PriorityQueue(UInt32).new(n)
+js = STDIN.gets_to_end.lines.map do |line|
+  a, b = line.split.map(&.to_u32)
+  {a, b}
 end
-js.sort_by! do |j|
-  j[:a]
-end
+js.sort!
 ret = 0_u64
 m.times do |i|
-  while js.size != 0 && js[0][:a] <= i + 1
+  while js.size != 0 && js[0][0] <= i + 1
     j = js.shift
-    q << -j[:b]
+    q << j[1]
   end
   value = q.pop
   unless value.nil?
-    ret += -value
+    ret += value
   end
 end
 puts ret
