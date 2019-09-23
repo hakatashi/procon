@@ -13,7 +13,7 @@ class PriorityQueue(T)
     index = @heap.size - 1
     while index != 0
       parent = (index - 1) / 2
-      if @heap[parent] <= @heap[index]
+      if @heap[parent] >= @heap[index]
         break
       end
       @heap[parent], @heap[index] = @heap[index], @heap[parent]
@@ -36,12 +36,12 @@ class PriorityQueue(T)
     @heap[0] = @heap.pop
     index = 0
     while index * 2 + 1 < @heap.size
-      child = if index * 2 + 2 < @heap.size && @heap[index * 2 + 1] > @heap[index * 2 + 2]
+      child = if index * 2 + 2 < @heap.size && @heap[index * 2 + 1] < @heap[index * 2 + 2]
         index * 2 + 2
       else
         index * 2 + 1
       end
-      if @heap[index] <= @heap[child]
+      if @heap[index] >= @heap[child]
         break
       end
       @heap[child], @heap[index] = @heap[index], @heap[child]

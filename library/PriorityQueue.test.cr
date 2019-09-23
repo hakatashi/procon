@@ -12,14 +12,14 @@ describe "PriorityQueue" do
     q << 8
     q << 7
     q << 4
-    q.pop.should eq 1
-    q.pop.should eq 2
-    q.pop.should eq 3
-    q.pop.should eq 4
-    q.pop.should eq 5
-    q.pop.should eq 6
-    q.pop.should eq 7
     q.pop.should eq 8
+    q.pop.should eq 7
+    q.pop.should eq 6
+    q.pop.should eq 5
+    q.pop.should eq 4
+    q.pop.should eq 3
+    q.pop.should eq 2
+    q.pop.should eq 1
   end
 
   describe "#empty?" do
