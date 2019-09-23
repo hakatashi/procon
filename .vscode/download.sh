@@ -6,8 +6,16 @@ if [ -x ~/.pyenv/shims/oj ]; then
   OJ=~/.pyenv/shims/oj
 fi
 
+TEST_DIR="tests/$task"
+
 echo "contest id: $contest"
 echo "task id: $task"
 
-rm -rf test
-$OJ download "https://atcoder.jp/contests/${contest}/tasks/${task}"
+if [ -d "${TEST_DIR}" ]; then
+  echo "Directory ${TEST_DIR} already exists. Skipping..."
+  exit 0
+fi
+
+mkdir -p "${TEST_DIR}"
+
+$OJ download "https://atcoder.jp/contests/${contest}/tasks/${task}" --directory "${TEST_DIR}"

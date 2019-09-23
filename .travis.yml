@@ -8,3 +8,6 @@ install:
 script:
   - /tmp/crystal-0.20.5-1/bin/crystal run test.cr
   - bash .vscode/test-all.sh
+cache:
+  directories:
+    - tests
