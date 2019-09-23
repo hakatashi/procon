@@ -1,3 +1,5 @@
+# status: skip (I/O fetching not works correctly)
+
 n, k = read_line.split.map(&.to_u64)
 ais = read_line.split.map(&.to_u64)
 indices_list = Hash(UInt64, Array(UInt64)).new
