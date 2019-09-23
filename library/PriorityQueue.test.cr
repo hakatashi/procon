@@ -21,4 +21,15 @@ describe "PriorityQueue" do
     q.pop.should eq 7
     q.pop.should eq 8
   end
+
+  describe "#empty?" do
+    it "should report true if queue is empty" do
+      q = PriorityQueue(Int32).new
+      q.empty?.should eq true
+      q << 1
+      q.empty?.should eq false
+      q.pop
+      q.empty?.should eq true
+    end
+  end
 end

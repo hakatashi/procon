@@ -49,4 +49,6 @@ class PriorityQueue(T)
     end
     ret
   end
+
+  delegate :empty?, to: @heap
 end
