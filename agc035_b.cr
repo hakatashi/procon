@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 n, m = read_line.split(" ").map(&.to_u64)
 if m % 2 == 1
   puts "-1"
