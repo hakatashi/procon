@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 s = read_line.to_u64
 a = 1000000000_u64
 d = (s.to_f / a.to_f).ceil.to_u64
