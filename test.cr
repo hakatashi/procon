@@ -1,0 +1,1 @@
+require "./library/PriorityQueue.test.cr"
