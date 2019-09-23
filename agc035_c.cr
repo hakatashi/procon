@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 n = read_line.to_u64
 if n.to_s(2).chars.count('1') == 1
   puts "No"
