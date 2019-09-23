@@ -1,3 +1,6 @@
+# PriorityQueue.cr by Koki Takahashi
+# Licensed under MIT License
+
 # Skew heap
 class Heap(T)
   property left : Heap(T)?, right : Heap(T)?, value : T?
