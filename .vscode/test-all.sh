@@ -3,6 +3,10 @@ set -xe
 pendings=()
 
 for file in *.cr; do
+  if [[ "$file" == test.cr ]] || [[ "$file" == bench.cr ]]; then
+    continue
+  fi
+
   if [[ "$file" == "yukicoder*" ]]; then
     echo "Skipping $file because it's for yukicoder..."
     continue
