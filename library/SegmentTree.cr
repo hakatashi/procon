@@ -54,7 +54,7 @@ class SegmentTree(T)
       return nil
     end
     if a <= range.begin && range.end <= b
-      if segment_index < @segments.size
+      if segment_index + 1 < @segments.size
         return @segments[segment_index]
       else
         return @values[segment_index + 1 - @segments.size]

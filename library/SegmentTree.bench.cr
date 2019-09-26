@@ -8,7 +8,7 @@ describe "SegmentTree" do
       n = 1000000
       segtree = SegmentTree.new((1..n).to_a)
       n.times do |i|
-        segtree[0...n].should eq n
+        segtree[0..i].should eq i + 1
       end
     end
   end

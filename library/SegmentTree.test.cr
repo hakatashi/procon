@@ -20,6 +20,7 @@ describe "SegmentTree" do
         segtree[50...70].should eq 70
         segtree[12...33].should eq 33
 
+        segtree[0..0].should eq 1
         segtree[16..16].should eq 17
         segtree[49..49].should eq 50
         segtree[88..88].should eq 89

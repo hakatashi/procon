@@ -1,4 +1,4 @@
-# -*- stutus: skip -*-
+# -*- status: skip -*-
 
 n = read_line.to_i
 r = Array.new(n) { Array.new(n, 0) }
