@@ -40,4 +40,21 @@ describe "SegmentTree" do
       end
     end
   end
+
+  describe "with custom comparison block" do
+    describe "min comparison" do
+      it "takes maximum value of selected range" do
+        segtree = SegmentTree.new((1..100).to_a) {|a, b| [a, b].min}
+        segtree[0...100].should eq 1
+        segtree[10...50].should eq 11
+        segtree[50...70].should eq 51
+        segtree[12...33].should eq 13
+
+        segtree[0..0].should eq 1
+        segtree[16..16].should eq 17
+        segtree[49..49].should eq 50
+        segtree[88..88].should eq 89
+      end
+    end
+  end
 end

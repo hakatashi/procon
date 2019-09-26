@@ -2,6 +2,11 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
+    initialize(values) {|a, b| [a, b].max}
+  end
+
+  def initialize(values : Array(T), &block : T, T -> T)
+    @compare_proc = block
     @values = values
     @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i, nil)
 
@@ -21,7 +26,7 @@ class SegmentTree(T)
         end
       end
       if !child1.nil? && !child2.nil?
-        @segments[i] = [child1, child2].max
+        @segments[i] = @compare_proc.call(child1, child2)
       elsif !child1.nil? && child2.nil?
         @segments[i] = child1
       end
@@ -34,7 +39,7 @@ class SegmentTree(T)
     child = value
     parent_index = (index + @segments.size - 2) / 2
     while parent_index >= 0
-      child = @segments[parent_index] = [child, @segments[parent_index].not_nil!].max
+      child = @segments[parent_index] = @compare_proc.call(child, @segments[parent_index].not_nil!)
       parent_index = (parent_index - 1) / 2
     end
   end
@@ -64,7 +69,7 @@ class SegmentTree(T)
     child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
     child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
     if !child1.nil? && !child2.nil?
-      [child1, child2].max
+      @compare_proc.call(child1, child2)
     elsif !child1.nil? && child2.nil?
       child1
     elsif child1.nil? && !child2.nil?
