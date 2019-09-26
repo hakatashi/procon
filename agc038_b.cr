@@ -1,205 +1,96 @@
-class AVLtree
-  class Node
-    property bal : Int32, left : Node?, data : UInt64, right : Node?
+class SegmentTree(T)
+  property values : Array(T)
 
-    def initialize(bal, left, data, right)
-      @bal, @left, @data, @right = bal, left, data, right
-    end
+  def initialize(values : Array(T))
+    initialize(values) {|a, b| [a, b].max}
+  end
 
-    def inspect
-      "(%s %s %s)" % [@left.inspect, @data.inspect, @right.inspect]
-    end
+  def initialize(values : Array(T), &block : T, T -> T)
+    @compare_proc = block
+    @values = values
+    @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i, nil)
 
-    def min
-      if @left.nil?
-        @data
+    # initialize segments
+    (@segments.size - 2).downto(0) do |i|
+      child1 = nil.as(T | Nil)
+      child2 = nil.as(T | Nil)
+      if i * 2 + 2 < @segments.size
+        child1 = @segments[i * 2 + 1]
+        child2 = @segments[i * 2 + 2]
       else
-        @left.not_nil!.min
+        if i * 2 + 2 - @segments.size < @values.size
+          child1 = @values[i * 2 + 2 - @segments.size]
+        end
+        if i * 2 + 3 - @segments.size < @values.size
+          child2 = @values[i * 2 + 3 - @segments.size]
+        end
       end
-    end
-
-    def max
-      if @right.nil?
-        @data
-      else
-        @right.not_nil!.max
+      if !child1.nil? && !child2.nil?
+        @segments[i] = @compare_proc.call(child1, child2)
+      elsif !child1.nil? && child2.nil?
+        @segments[i] = child1
       end
     end
   end
 
-  def inspect() @root.inspect end
+  def []=(index : Int, value : T)
+    @values[index] = value
 
-  property root : Node?
-
-  def initialize(root = nil)
-    @root = root
+    child = value
+    parent_index = (index + @segments.size - 2) / 2
+    while parent_index >= 0
+      child = @segments[parent_index] = @compare_proc.call(child, @segments[parent_index].not_nil!)
+      parent_index = (parent_index - 1) / 2
+    end
   end
 
-  def insert(x)
-    child = Node.new(0, nil, x, nil)
-    return self.tap{ @root = child } if @root.nil?
-    path = [] of Node
-    node = @root
-    while !node.nil?
-      return self if x == node.data
-      path.push node
-      if x < node.data
-        node = node.left
+  def [](index : Int)
+    @values[index]
+  end
+
+  def [](range : Range(Int, Int))
+    a = range.begin
+    b = range.exclusive? ? range.end : range.end + 1
+    get_value(a, b, 0, 0...@segments.size).not_nil!
+  end
+
+  def get_value(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
+    if range.end <= a || b <= range.begin
+      return nil
+    end
+    if a <= range.begin && range.end <= b
+      if segment_index + 1 < @segments.size
+        return @segments[segment_index]
       else
-        node = node.right
+        return @values[segment_index + 1 - @segments.size]
       end
     end
-    path.push child
-    parent = path[-2]
-    if x < parent.data
-      parent.left = child
+    range_median = (range.begin + range.end) / 2
+    child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
+    child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
+    if !child1.nil? && !child2.nil?
+      @compare_proc.call(child1, child2)
+    elsif !child1.nil? && child2.nil?
+      child1
+    elsif child1.nil? && !child2.nil?
+      child2
     else
-      parent.right = child
+      nil
     end
-    balance(path, :insert)
-    self
-  end
-
-  def delete(x)
-    return self if @root.nil?
-    path = [] of Node
-    just, node = nil, @root
-    while !node.nil?
-      if x == node.data
-        just = node
-      end
-      path.push node
-      if x <= node.data
-        node = node.left
-      else
-        node = node.right
-      end
-    end
-    return self if just.nil?
-    node = path[-1]     # path = [..., parent, node]
-    parent = path.size >= 2 ? path[-2] : nil
-    if !just == node
-      just.data = node.data
-    end
-    child = node.right.nil? ? node.left : node.right
-    if parent.nil?
-      @root = child
-    elsif parent.left == node
-      parent.left = child
-    else
-      parent.right = child
-    end
-    if child.nil?
-      path.pop
-    else
-      path[-1] = child
-    end
-    balance(path, :delete)
-    self
-  end
-
-  def min
-    @root.not_nil!.min
-  end
-
-  def max
-    @root.not_nil!.max
-  end
-
-  # based on csh/sh.set.c 5.2 (Berkeley) 1985-06-06
-  # see http://minnie.tuhs.org/cgi-bin/utree.pl?file=4.3BSD/usr/src/bin/csh/sh.set.c
-
-  def balance(path, d)
-    path.each_cons(2).to_a.reverse_each do |(n, t)|
-      if (d == :delete) ^ (n.right == t)
-        balance_right_heavy(n)
-      else
-        balance_left_heavy(n)
-      end
-      break if (d == :delete) ^ (n.bal == 0)
-    end
-  end
-
-  def balance_right_heavy(n)
-    if n.bal == 0
-      n.bal = +1
-    elsif n.bal < 0 || n.right.nil?
-      n.bal =  0
-    else  # was right heavy
-      case n.right.not_nil!.bal
-      when +1
-        rotate_left(n)
-        n.left.not_nil!.bal = 0
-        n.bal = 0
-      when  0
-        rotate_left(n)
-        n.left.not_nil!.bal = +1
-        n.bal = -1
-      when -1
-        b = n.right.not_nil!.left.not_nil!.bal
-        rotate_right(n.right.not_nil!)
-        rotate_left(n)
-        n.left.not_nil!.bal  = b > 0 ? -1 : 0 
-        n.right.not_nil!.bal = b < 0 ? +1 : 0 
-        n.bal = 0
-      end
-    end
-  end
-
-  def balance_left_heavy(n)
-    if n.bal == 0
-      n.bal = -1
-    elsif n.bal > 0 || n.left.nil?  # was right heavy
-      n.bal =  0
-    else  # was left heavy
-      case n.left.not_nil!.bal
-      when -1
-        rotate_right(n)
-        n.right.not_nil!.bal = 0
-        n.bal = 0
-      when  0
-        rotate_right(n)
-        n.right.not_nil!.bal = -1
-        n.bal = +1
-      when +1
-        b = n.left.not_nil!.right.not_nil!.bal
-        rotate_left(n.left.not_nil!)
-        rotate_right(n)
-        n.left.not_nil!.bal  = b > 0 ? -1 : 0
-        n.right.not_nil!.bal = b < 0 ? +1 : 0
-        n.bal = 0
-      end
-    end
-  end
-
-  def rotate_left(n)
-    # #n=(p0 d1 #m=(p2 d3 p4)) => #n=(#m=(p0 d1 p2) d3 p4)
-    p0, d1, p2, d3, p4 = n.left, n.data, n.right.not_nil!.left, n.right.not_nil!.data, n.right.not_nil!.right
-    n.left = n.right
-    n.left.not_nil!.left, n.left.not_nil!.data, n.left.not_nil!.right, n.data, n.right = p0, d1, p2, d3, p4
-    n
-  end
-
-  def rotate_right(n)
-    # #n=(#m=(p0 d1 p2) d3 p4) => #n=(p0 d1 #m=(p2 d3 p4))
-    p0, d1, p2, d3, p4 = n.left.not_nil!.left, n.left.not_nil!.data, n.left.not_nil!.right, n.data, n.right
-    n.right = n.left
-    n.left, n.data, n.right.not_nil!.left, n.right.not_nil!.data, n.right.not_nil!.right = p0, d1, p2, d3, p4
   end
 end
-
 
 
 n, k = read_line.split.map(&.to_u64)
 ps = read_line.split.map(&.to_u64)
 
-tree = AVLtree.new
+min_segtree = SegmentTree.new(ps) {|a, b| [a, b].min}
+max_segtree = SegmentTree.new(ps) {|a, b| [a, b].max}
 
 last_unsorted = -1
 
 ret = 1_u64
 k.times do |i|
-  tree.insert ps[i]
   if i >= 1
     if ps[i - 1] > ps[i]
       last_unsorted = i - 1
@@ -220,16 +111,12 @@ k.upto(n - 1) do |i|
     last_unsorted = i - 1
   end
 
-  tree.delete pv
-  if pv < tree.min && tree.max < v
-  else
+  unless pv < min_segtree[(i - k + 1)...i] && max_segtree[(i - k + 1)...i] < v
     if i - last_unsorted >= k
       sorted += 1
     end
     ret += 1
   end
-
-  tree.insert v
 end
 
 if sorted >= 2

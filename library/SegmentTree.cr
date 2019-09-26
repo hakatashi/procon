@@ -51,7 +51,7 @@ class SegmentTree(T)
   def [](range : Range(Int, Int))
     a = range.begin
     b = range.exclusive? ? range.end : range.end + 1
-    get_value(a, b, 0, 0...@segments.size)
+    get_value(a, b, 0, 0...@segments.size).not_nil!
   end
 
   def get_value(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
