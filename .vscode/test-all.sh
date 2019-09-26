@@ -7,7 +7,7 @@ for file in *.cr; do
     continue
   fi
 
-  if [[ "$file" == "yukicoder*" ]]; then
+  if [[ "$file" == yukicoder* ]]; then
     echo "Skipping $file because it's for yukicoder..."
     continue
   fi
