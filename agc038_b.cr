@@ -84,8 +84,8 @@ end
 n, k = read_line.split.map(&.to_u64)
 ps = read_line.split.map(&.to_u64)
 
-min_segtree = SegmentTree.new(ps) {|a, b| [a, b].min}
-max_segtree = SegmentTree.new(ps) {|a, b| [a, b].max}
+min_segtree = SegmentTree.new(ps) {|a, b| a < b ? a : b}
+max_segtree = SegmentTree.new(ps) {|a, b| a > b ? a : b}
 
 last_unsorted = -1
 

@@ -2,7 +2,7 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
-    initialize(values) {|a, b| [a, b].max}
+    initialize(values) {|a, b| a > b ? a : b}
   end
 
   def initialize(values : Array(T), &block : T, T -> T)
