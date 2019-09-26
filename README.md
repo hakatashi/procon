@@ -1,4 +1,4 @@
-# procon
+# procon [![Build Status](https://travis-ci.org/hakatashi/procon.svg?branch=master)](https://travis-ci.org/hakatashi/procon)
 
 Disclaimer: This repository may contain any solution of public programing contests.
 
