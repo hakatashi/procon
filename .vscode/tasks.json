@@ -2,29 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Download",
-      "type": "shell",
-      "command": "./.vscode/download.sh",
-      "options": {
-        "cwd": "${workspaceRoot}"
-      },
-      "windows": {
-        "options": {
-          "shell": {
-            "executable": "C:\\Windows\\System32\\wsl.exe"
-          }
-        }
-      },
-      "args": [
-        "${fileBasenameNoExtension}"
-      ],
-      "group": "build",
-      "presentation": {
-        "reveal": "silent"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "Test",
       "type": "shell",
       "command": "./.vscode/test.sh",

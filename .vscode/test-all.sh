@@ -1,4 +1,4 @@
-set -xe
+set -e
 
 pendings=()
 
@@ -23,8 +23,6 @@ for file in *.cr; do
     continue
   fi
 
-  .vscode/download.sh "${file%.*}"
-  rm -f a.out
   .vscode/test.sh "$file"
 done
 

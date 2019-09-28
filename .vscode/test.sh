@@ -1,13 +1,24 @@
 filename="$1"
 task="${filename%.*}"
 bin="./bin/${filename%.*}"
-
-./.vscode/build.sh "$filename" || exit 1
+contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
+TEST_DIR="tests/$task"
 
 OJ=oj
 if [ -x ~/.pyenv/shims/oj ]; then
   OJ=~/.pyenv/shims/oj
 fi
+
+echo "contest id: $contest"
+echo "task id: $task"
+
+if [ ! -d "${TEST_DIR}" ]; then
+  echo "Directory ${TEST_DIR} not exists. Downloading..."
+  mkdir -p "${TEST_DIR}"
+  $OJ download "https://atcoder.jp/contests/${contest}/tasks/${task}" --directory "${TEST_DIR}"
+fi
+
+./.vscode/build.sh "$filename" || exit 1
 
 TESTFLAGS=
 if grep -q -i 'mode: float' "$filename"; then
