@@ -1,6 +1,10 @@
 filename="$1"
 task="${filename%.*}"
-contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
+if grep -q -i 'contest: ' "$filename"; then
+  contest=$(grep -P '(?<=contest: )\S+' -o "$filename")
+else
+  contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
+fi
 
 OJ=oj
 if [ -x ~/.pyenv/shims/oj ]; then

@@ -1,7 +1,11 @@
 filename="$1"
 task="${filename%.*}"
-bin="./bin/${filename%.*}"
-contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
+bin="./bin/$task"
+if grep -q -i 'contest: ' "$filename"; then
+  contest=$(grep -P '(?<=contest: )\S+' -o "$filename")
+else
+  contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
+fi
 TEST_DIR="tests/$task"
 
 OJ=oj
