@@ -1,36 +1,34 @@
 # -*- contest: jsc2019-final-open -*-
 
+require "big"
+
 n = read_line.to_i
-aiss = Array(Array(Char)).new
-bss = Array(Array(Char)).new
+aiss = [] of BigInt
+bss = [] of BigInt
 
 n.times do
-  aiss << read_line.chars
+  aiss << BigInt.new(read_line.reverse, base: 2)
 end
 n.times do
-  bss << read_line.chars
+  bss << BigInt.new(read_line.reverse, base: 2)
 end
 
-css = Array(Array(Char)).new(n) { Array(Char).new(n) { '1' } }
+css = Array(BigInt).new(n) { BigInt.new("1" * n, base: 2) }
 
 aiss.each_with_index do |ais, i|
-  ais.each_with_index do |a, j|
-    if a == '1'
-      bss[i].each_with_index do |b, k|
-        if b == '0'
-          css[j][k] = '0'
-        end
-      end
+  n.times do |j|
+    if ((ais >> j) & 1) != 0
+      css[j] = css[j] & bss[i]
     end
   end
 end
 
 bss.each_with_index do |bs, i|
-  bs.each_with_index do |b, j|
-    if b == '1'
+  n.times do |j|
+    if ((bs >> j) & 1) != 0
       pass = false
       n.times do |k|
-        if aiss[i][k] == '1' && css[k][j] == '1'
+        if ((aiss[i] >> k) & (css[k] >> j) & 1) != 0
           pass = true
           break
         end
@@ -44,5 +42,5 @@ bss.each_with_index do |bs, i|
 end
 
 css.each do |cs|
-  puts cs.join
+  puts cs.to_s(2).rjust(n, '0').reverse
 end
