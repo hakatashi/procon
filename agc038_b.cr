@@ -367,22 +367,17 @@ if last_unsorted == -1
 end
 
 k.upto(n - 1) do |i|
-  v = ps[i]
-  pv = ps[i - k]
-
   if ps[i - 1] > ps[i]
     last_unsorted = i - 1
   end
 
   tree.delete ps[i - k]
-
-  unless pv < tree.min && tree.max < v
+  unless ps[i - k] < tree.min && tree.max < ps[i]
     if i - last_unsorted >= k
       sorted += 1
     end
     ret += 1
   end
-
   tree << ps[i]
 end
 
