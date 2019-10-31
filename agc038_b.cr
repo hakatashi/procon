@@ -1,82 +1,345 @@
-class SegmentTree(T)
-  property values : Array(T)
+# bench_red_black_tree.rb by Rubinius Project, (c) Rubinius Contributors
+# https://github.com/rubinius/rubinius-benchmark/blob/master/real_world/bench_red_black_tree.rb
+# Licensed under BSD License
 
-  def initialize(values : Array(T))
-    initialize(values) {|a, b| [a, b].max}
+# red_black_tree.cr by Crystal Language Project, (c) Manas Technology Solutions
+# https://github.com/crystal-lang/crystal/blob/master/samples/red_black_tree.cr
+# Licensed under MIT License
+
+# RedBlackTree.cr by Koki Takahashi
+# Licensed under MIT License
+
+class RedBlackTree
+  class Node
+    property :color
+    property :key
+    property! :left
+    property! :right
+    property! parent : self
+
+    RED   = :red
+    BLACK = :black
+
+    def initialize(@key : UInt64, @color = RED)
+      @left = @right = @parent = NilNode.instance
+    end
+
+    def black?
+      color == BLACK
+    end
+
+    def red?
+      color == RED
+    end
+
+    def nil_node?
+      false
+    end
   end
 
-  def initialize(values : Array(T), &block : T, T -> T)
-    @compare_proc = block
-    @values = values
-    @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i, nil)
+  class NilNode < Node
+    def self.instance
+      @@instance ||= RedBlackTree::NilNode.new
+    end
 
-    # initialize segments
-    (@segments.size - 2).downto(0) do |i|
-      child1 = nil.as(T | Nil)
-      child2 = nil.as(T | Nil)
-      if i * 2 + 2 < @segments.size
-        child1 = @segments[i * 2 + 1]
-        child2 = @segments[i * 2 + 2]
-      else
-        if i * 2 + 2 - @segments.size < @values.size
-          child1 = @values[i * 2 + 2 - @segments.size]
+    def initialize
+      @key = 0_u64
+      @color = BLACK
+      @left = @right = @parent = self
+    end
+
+    def nil_node?
+      true
+    end
+  end
+
+  property root : Node
+  property :size
+
+  def initialize
+    @root = NilNode.instance
+    @size = 0
+  end
+
+  def insert(key)
+    insert_node(Node.new(key))
+  end
+
+  def insert_node(x)
+    insert_helper(x)
+
+    x.color = Node::RED
+    while x != root && x.parent.color == Node::RED
+      if x.parent == x.parent.parent.left
+        y = x.parent.parent.right
+        if !y.nil_node? && y.color == Node::RED
+          x.parent.color = Node::BLACK
+          y.color = Node::BLACK
+          x.parent.parent.color = Node::RED
+          x = x.parent.parent
+        else
+          if x == x.parent.right
+            x = x.parent
+            left_rotate(x)
+          end
+          x.parent.color = Node::BLACK
+          x.parent.parent.color = Node::RED
+          right_rotate(x.parent.parent)
         end
-        if i * 2 + 3 - @segments.size < @values.size
-          child2 = @values[i * 2 + 3 - @segments.size]
+      else
+        y = x.parent.parent.left
+        if !y.nil_node? && y.color == Node::RED
+          x.parent.color = Node::BLACK
+          y.color = Node::BLACK
+          x.parent.parent.color = Node::RED
+          x = x.parent.parent
+        else
+          if x == x.parent.left
+            x = x.parent
+            right_rotate(x)
+          end
+          x.parent.color = Node::BLACK
+          x.parent.parent.color = Node::RED
+          left_rotate(x.parent.parent)
         end
       end
-      if !child1.nil? && !child2.nil?
-        @segments[i] = @compare_proc.call(child1, child2)
-      elsif !child1.nil? && child2.nil?
-        @segments[i] = child1
-      end
     end
+    root.color = Node::BLACK
   end
 
-  def []=(index : Int, value : T)
-    @values[index] = value
+  def delete_node(z)
+    y = (z.left.nil_node? || z.right.nil_node?) ? z : successor(z)
+    x = y.left.nil_node? ? y.right : y.left
+    x.parent = y.parent
 
-    child = value
-    parent_index = (index + @segments.size - 2) / 2
-    while parent_index >= 0
-      child = @segments[parent_index] = @compare_proc.call(child, @segments[parent_index].not_nil!)
-      parent_index = (parent_index - 1) / 2
-    end
-  end
-
-  def [](index : Int)
-    @values[index]
-  end
-
-  def [](range : Range(Int, Int))
-    a = range.begin
-    b = range.exclusive? ? range.end : range.end + 1
-    get_value(a, b, 0, 0...@segments.size).not_nil!
-  end
-
-  def get_value(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
-    if range.end <= a || b <= range.begin
-      return nil
-    end
-    if a <= range.begin && range.end <= b
-      if segment_index + 1 < @segments.size
-        return @segments[segment_index]
-      else
-        return @values[segment_index + 1 - @segments.size]
-      end
-    end
-    range_median = (range.begin + range.end) / 2
-    child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
-    child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
-    if !child1.nil? && !child2.nil?
-      @compare_proc.call(child1, child2)
-    elsif !child1.nil? && child2.nil?
-      child1
-    elsif child1.nil? && !child2.nil?
-      child2
+    if y.parent.nil_node?
+      self.root = x
     else
-      nil
+      if y == y.parent.left
+        y.parent.left = x
+      else
+        y.parent.right = x
+      end
     end
+
+    z.key = y.key if y != z
+
+    if y.color == Node::BLACK
+      delete_fixup(x)
+    end
+
+    self.size -= 1
+    y
+  end
+
+  def minimum_node(x = root)
+    while !x.left.nil_node?
+      x = x.left
+    end
+    x
+  end
+
+  def maximum_node(x = root)
+    while !x.right.nil_node?
+      x = x.right
+    end
+    x
+  end
+
+  def successor(x)
+    if !x.right.nil_node?
+      return minimum_node(x.right)
+    end
+    y = x.parent
+    while !y.nil_node? && x == y.right
+      x = y
+      y = y.parent
+    end
+    y
+  end
+
+  def predecessor(x)
+    if !x.left.nil_node?
+      return maximum_node(x.left)
+    end
+    y = x.parent
+    while !y.nil_node? && x == y.left
+      x = y
+      y = y.parent
+    end
+    y
+  end
+
+  def inorder_walk(x = root)
+    x = self.minimum_node
+    while !x.nil_node?
+      yield x.key
+      x = successor(x)
+    end
+  end
+
+  def each(x = root)
+    inorder_walk(x) { |k| yield k }
+  end
+
+  def reverse_inorder_walk(x = root)
+    x = self.maximum_node
+    while !x.nil_node?
+      yield x.key
+      x = predecessor(x)
+    end
+  end
+
+  def reverse_each(x = root)
+    reverse_inorder_walk(x) { |k| yield k }
+  end
+
+  def search(key, x = root)
+    while !x.nil_node? && x.key != key
+      x = (key < x.key) ? x.left : x.right
+    end
+    x
+  end
+
+  def empty?
+    self.root.nil_node?
+  end
+
+  def black_height(x = root)
+    height = 0
+    while !x.nil_node?
+      x = x.left
+      height += 1 if x.nil_node? || x.black?
+    end
+    height
+  end
+
+  private def left_rotate(x)
+    raise "x.right is nil!" if x.right.nil_node?
+    y = x.right
+    x.right = y.left
+    y.left.parent = x if !y.left.nil_node?
+    y.parent = x.parent
+    if x.parent.nil_node?
+      self.root = y
+    else
+      if x == x.parent.left
+        x.parent.left = y
+      else
+        x.parent.right = y
+      end
+    end
+    y.left = x
+    x.parent = y
+  end
+
+  private def right_rotate(x)
+    raise "x.left is nil!" if x.left.nil_node?
+    y = x.left
+    x.left = y.right
+    y.right.parent = x if !y.right.nil_node?
+    y.parent = x.parent
+    if x.parent.nil_node?
+      self.root = y
+    else
+      if x == x.parent.left
+        x.parent.left = y
+      else
+        x.parent.right = y
+      end
+    end
+    y.right = x
+    x.parent = y
+  end
+
+  private def insert_helper(z)
+    y = NilNode.instance
+    x = root
+    while !x.nil_node?
+      y = x
+      x = (z.key < x.key) ? x.left : x.right
+    end
+    z.parent = y
+    if y.nil_node?
+      self.root = z
+    else
+      z.key < y.key ? y.left = z : y.right = z
+    end
+    self.size += 1
+  end
+
+  private def delete_fixup(x)
+    while x != root && x.color == Node::BLACK
+      if x == x.parent.left
+        w = x.parent.right
+        if w.color == Node::RED
+          w.color = Node::BLACK
+          x.parent.color = Node::RED
+          left_rotate(x.parent)
+          w = x.parent.right
+        end
+        if w.left.color == Node::BLACK && w.right.color == Node::BLACK
+          w.color = Node::RED
+          x = x.parent
+        else
+          if w.right.color == Node::BLACK
+            w.left.color = Node::BLACK
+            w.color = Node::RED
+            right_rotate(w)
+            w = x.parent.right
+          end
+          w.color = x.parent.color
+          x.parent.color = Node::BLACK
+          w.right.color = Node::BLACK
+          left_rotate(x.parent)
+          x = root
+        end
+      else
+        w = x.parent.left
+        if w.color == Node::RED
+          w.color = Node::BLACK
+          x.parent.color = Node::RED
+          right_rotate(x.parent)
+          w = x.parent.left
+        end
+        if w.right.color == Node::BLACK && w.left.color == Node::BLACK
+          w.color = Node::RED
+          x = x.parent
+        else
+          if w.left.color == Node::BLACK
+            w.right.color = Node::BLACK
+            w.color = Node::RED
+            left_rotate(w)
+            w = x.parent.left
+          end
+          w.color = x.parent.color
+          x.parent.color = Node::BLACK
+          w.left.color = Node::BLACK
+          right_rotate(x.parent)
+          x = root
+        end
+      end
+    end
+    x.color = Node::BLACK
+  end
+
+  def min
+    minimum_node.key
+  end
+
+  def max
+    maximum_node.key
+  end
+
+  def delete(key)
+    node = search(key)
+    unless node.nil_node?
+      delete_node(node)
+    end
+  end
+
+  def <<(x)
+    insert(x)
   end
 end
 
@@ -84,13 +347,13 @@ end
 n, k = read_line.split.map(&.to_u64)
 ps = read_line.split.map(&.to_u64)
 
-min_segtree = SegmentTree.new(ps) {|a, b| a < b ? a : b}
-max_segtree = SegmentTree.new(ps) {|a, b| a > b ? a : b}
+tree = RedBlackTree.new
 
 last_unsorted = -1
 
 ret = 1_u64
 k.times do |i|
+  tree << ps[i]
   if i >= 1
     if ps[i - 1] > ps[i]
       last_unsorted = i - 1
@@ -111,12 +374,16 @@ k.upto(n - 1) do |i|
     last_unsorted = i - 1
   end
 
-  unless pv < min_segtree[(i - k + 1)...i] && max_segtree[(i - k + 1)...i] < v
+  tree.delete ps[i - k]
+
+  unless pv < tree.min && tree.max < v
     if i - last_unsorted >= k
       sorted += 1
     end
     ret += 1
   end
+
+  tree << ps[i]
 end
 
 if sorted >= 2
