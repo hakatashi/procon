@@ -338,6 +338,11 @@ class RedBlackTree
     end
   end
 
+  def has_key?(key)
+    node = search(key)
+    !node.nil_node?
+  end
+
   def <<(x)
     insert(x)
   end
