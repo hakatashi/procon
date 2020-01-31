@@ -1,0 +1,1 @@
+f r*cc="%2?"Odd":"Even"ZZ

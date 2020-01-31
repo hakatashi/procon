@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Stirling backup files
+*.bak
+
 tests
 bin
 in
