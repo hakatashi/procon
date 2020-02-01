@@ -1,3 +1,1 @@
-J:s/ /+/g
-C<C-R>=<C-R>"
-<Esc>JZZ
+DJ@"<C-A>wdw0@"<C-A>JZZ
