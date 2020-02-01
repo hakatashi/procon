@@ -1,5 +1,6 @@
 filename="$1"
-task="${filename%.*}"
+task="$(echo $filename | cut -d. -f1)"
+bin="./bin/${filename%.*}"
 if grep -q -i 'contest: ' "$filename"; then
   contest=$(grep -P '(?<=contest: )\S+' -o "$filename")
 else
@@ -19,8 +20,11 @@ if [[ ! `cat /usr/bin/sensible-browser` =~ '"${BROWSER}"' ]]; then
   sudo sed -i 's/${BROWSER} /"${BROWSER}" /' /usr/bin/sensible-browser
 fi
 
-if [ "${filename##*.}" = ".cpp" ]; then
+if [ "${filename##*.}" = "cpp" ]; then
   BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language C++14 --yes
-else
+elif [ "${filename##*.}" = "cr" ]; then
   BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language Crystal --yes
+elif [ "${filename##*.}" = "vim" ]; then
+  ./.vscode/build.sh "$filename" || exit 1
+  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${bin}" --no-guess --language Vim --yes
 fi

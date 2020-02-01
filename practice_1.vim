@@ -1,1 +1,2 @@
-dd"adwC="+@1+@aJZZ
+dd"adwC<C-R>=<C-R>"+@1+@a
+<Esc>JZZ

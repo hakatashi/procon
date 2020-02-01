@@ -1,3 +1,3 @@
-C0:sor u
-100@='JD'
+C0<Esc>:sor u
+100@='JD<C-A>'
 ZZ
