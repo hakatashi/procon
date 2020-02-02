@@ -1,10 +1,10 @@
-:normal! "ndd
+:normal "ndd
 :s/ /\r/g
 :sort! n
 :let r = 0
-:normal! gg
+:normal gg
 :for i in range(@n)
-  :normal! "add
+  :normal "add
   :let r += i % 2 ? -@a :@a
 :endfor
 :put! = r

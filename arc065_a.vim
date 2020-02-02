@@ -1,3 +1,4 @@
-:g/\v^([ed]re*as*.e*r*)*$/norm! D
-:pu!=@\"==''?'NO':'YES'
-jddZZ
+:g/\v^(dream|dreamer|erase|eraser)*$/normal D
+:put! = @\" == '' ? 'NO' : 'YES'
+:normal jdd
+:wq

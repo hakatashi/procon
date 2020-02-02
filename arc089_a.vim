@@ -1,4 +1,5 @@
-:norm! "ndd
+:ec contest: language-test-202001
+:normal "ndd
 :let ct = 0
 :let cx = 0
 :let cy = 0
@@ -15,5 +16,4 @@
   :let cy = @y
 :endfor
 :put! = ok ? 'Yes' : 'No'
-:norm! jdd
 :wq

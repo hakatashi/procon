@@ -1,3 +1,4 @@
-:s/./+&/g
-C<C-R>=<C-R>"
-<Esc>ZZ
+:ec contest: language-test-202001
+:normal! "ax"bx"cx
+:put! = @a + @b + @c
+:wq

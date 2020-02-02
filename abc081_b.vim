@@ -1,7 +1,7 @@
-:normal! "ndd
+:normal "ndd
 :let r = 99
 :for i in range(@n)
-  :normal! "adw
+  :normal "adw
   :let j = 0
   :let a = @a
   :while a % 2 == 0

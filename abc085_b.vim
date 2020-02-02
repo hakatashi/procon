@@ -1,3 +1,6 @@
-C0<Esc>:sor u
-100@='JD<C-A>'
-ZZ
+:normal dd
+:sort u
+:let a = line('$')
+:normal ggVGd
+:put! = a
+:wq

@@ -1,1 +1,1 @@
-DJ@"<C-A>wdw0@"<C-A>JZZ
+DJ@"<C-A>wD0@"<C-A>JZZ

@@ -1,5 +1,5 @@
 :ec contest: language-test-202001
-:normal! "ndw"ydw
+:normal "ndw"ydw
 :for a in range(0, @n)
   :let money = @y - a * 10000
   :let cnt = str2nr(@n) - a
