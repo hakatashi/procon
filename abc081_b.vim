@@ -1,3 +1,4 @@
+:ec contest: language-test-202001
 :normal "ndd
 :let r = 99
 :for i in range(@n)

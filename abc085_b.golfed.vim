@@ -1,3 +1,2 @@
 C0<Esc>:sor u
-100@='JD<C-A>'
-ZZ
+qqJD<C-A>@qq@qZZ
