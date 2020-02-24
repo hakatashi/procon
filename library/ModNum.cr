@@ -2,6 +2,7 @@ record ModNum, value : Int64 do
   @@factorials = Array(ModNum).new(100_000_i64) # Change here to improve performance
 
   def self.permutation(n, k)
+    raise ArgumentError.new("k cannot be greater than n") unless n >= k
     if @@factorials.empty?
       @@factorials << ModNum.new(1_i64)
     end
@@ -13,6 +14,7 @@ record ModNum, value : Int64 do
   end
 
   def self.combination(n, k)
+    raise ArgumentError.new("k cannot be greater than n") unless n >= k
     permutation(n, k) / @@factorials[k]
   end
 
@@ -52,10 +54,12 @@ record ModNum, value : Int64 do
   end
 
   def /(value : ModNum)
+    raise DivisionByZero.new if value == 0
     self * value.inv
   end
 
   def /(value)
+    raise DivisionByZero.new if value == 0
     self * ModNum.new(value.to_i64 % MOD).inv
   end
 
@@ -71,6 +75,10 @@ record ModNum, value : Int64 do
       e /= 2
     end
     ret
+  end
+
+  def <<(value)
+    self * ModNum.new(2_i64) ** value
   end
 
   def sqrt
