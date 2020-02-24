@@ -100,7 +100,7 @@ describe "ModNum" do
   describe "#sqrt" do
     it "generates square-rooted number" do
       ModNum.new(100_i64).sqrt.should eq 10
-      ModNum.new(2_i64).sqrt.should eq 59713600
+      ModNum.new(2_i64).sqrt.should eq 59_713_600
       ModNum.new(5_i64).sqrt.should eq nil
     end
   end
