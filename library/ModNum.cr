@@ -20,7 +20,7 @@ record ModNum, value : Int64 do
     combination(n + k - 1, k)
   end
 
-  def extended_gcd(a, b)
+  def self.extended_gcd(a, b)
     last_remainder, remainder = a.abs, b.abs
     x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
     while remainder != 0
@@ -35,7 +35,7 @@ record ModNum, value : Int64 do
   end
 
   def inv
-    g, x = extended_gcd(@value, MOD)
+    g, x = ModNum.extended_gcd(@value, MOD)
     ModNum.new(x % MOD)
   end
 
@@ -60,8 +60,8 @@ record ModNum, value : Int64 do
   end
 
   def **(value)
-    b = self
-    e = value.to_i64
+    b = value > 0 ? self : self.inv
+    e = value.abs
     ret = ModNum.new(1_i64)
     while e > 0
       if e % 2 == 1
@@ -95,19 +95,49 @@ record ModNum, value : Int64 do
       end
       c *= c
     end
-    r
+    if r * r == self
+      r.to_i64 * 2 <= MOD ? r : -r
+    else
+      nil
+    end
   end
 
   def to_i64
     @value
   end
 
-  def ==(value)
+  def ==(value : ModNum)
     @value == value.to_i64
   end
 
-  def !=(value)
-    @value != value.to_i64
+  def ==(value)
+    @value == value
+  end
+
+  def -
+    ModNum.new(0_i64) - self
+  end
+
+  def +
+    self
+  end
+
+  def abs
+    self
+  end
+
+  # ModNum shouldn't be compared
+  def <(value)
+    raise NotImplementedError.new("<")
+  end
+  def <=(value)
+    raise NotImplementedError.new("<=")
+  end
+  def <(value)
+    raise NotImplementedError.new("<")
+  end
+  def >=(value)
+    raise NotImplementedError.new(">=")
   end
 
   def to_s
@@ -116,9 +146,5 @@ record ModNum, value : Int64 do
 
   def inspect
     @value.inspect
-  end
-
-  def abs
-    self
   end
 end
