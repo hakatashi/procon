@@ -7,9 +7,12 @@ else
   contest=$(echo "$task" | rev | cut -d _ -f 2- | rev | tr _ -)
 fi
 
-OJ=oj
 if [ -x ~/.pyenv/shims/oj ]; then
   OJ=~/.pyenv/shims/oj
+elif [ -x ~/.local/bin/oj ]; then
+  OJ=~/.local/bin/oj
+else
+  OJ=oj
 fi
 
 echo "filename: $filename"

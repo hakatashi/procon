@@ -9,9 +9,12 @@ else
 fi
 TEST_DIR="tests/$task"
 
-OJ=oj
 if [ -x ~/.pyenv/shims/oj ]; then
   OJ=~/.pyenv/shims/oj
+elif [ -x ~/.local/bin/oj ]; then
+  OJ=~/.local/bin/oj
+else
+  OJ=oj
 fi
 
 echo "contest id: $contest"
