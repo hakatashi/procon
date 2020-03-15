@@ -1,5 +1,5 @@
 # PriorityQueue.cr by Koki Takahashi
-# Licensed under MIT License
+# Licensed under MIT License https://mit-license.org
 
 class PriorityQueue(T)
   property heap : Array(T)

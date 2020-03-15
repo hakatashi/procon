@@ -1,5 +1,5 @@
 # SegmentTree.cr by Koki Takahashi
-# Licensed under MIT License
+# Licensed under MIT License https://mit-license.org
 
 class SegmentTree(T)
   property values : Array(T)

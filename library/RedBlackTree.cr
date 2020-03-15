@@ -1,13 +1,13 @@
 # bench_red_black_tree.rb by Rubinius Project, (c) Rubinius Contributors
 # https://github.com/rubinius/rubinius-benchmark/blob/master/real_world/bench_red_black_tree.rb
-# Licensed under BSD License
+# Licensed under BSD License https://spdx.org/licenses/BSD-3-Clause.html
 
 # red_black_tree.cr by Crystal Language Project, (c) Manas Technology Solutions
 # https://github.com/crystal-lang/crystal/blob/master/samples/red_black_tree.cr
-# Licensed under MIT License
+# Licensed under MIT License https://mit-license.org
 
 # RedBlackTree.cr by Koki Takahashi
-# Licensed under MIT License
+# Licensed under MIT License https://mit-license.org
 
 class RedBlackTree
   class Node

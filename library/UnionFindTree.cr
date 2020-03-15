@@ -1,5 +1,5 @@
 # UnionFindTree.cr by Koki Takahashi
-# Licensed under MIT License
+# Licensed under MIT License https://mit-license.org
 
 class UnionFindTree
   property parents : Array(Int32)

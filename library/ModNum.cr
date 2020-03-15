@@ -1,3 +1,6 @@
+# ModNum.cr by Koki Takahashi
+# Licensed under MIT License https://mit-license.org
+
 record ModNum, value : Int64 do
   @@factorials = Array(ModNum).new(100_000_i64) # Change here to improve performance
 
