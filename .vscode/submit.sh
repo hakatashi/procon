@@ -23,11 +23,13 @@ if [[ ! `cat /usr/bin/sensible-browser` =~ '"${BROWSER}"' ]]; then
   sudo sed -i 's/${BROWSER} /"${BROWSER}" /' /usr/bin/sensible-browser
 fi
 
+export BROWSER="/mnt/c/Program Files/Firefox Developer Edition/firefox.exe"
+
 if [ "${filename##*.}" = "cpp" ]; then
-  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language C++14 --yes
+  $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language C++14 --yes
 elif [ "${filename##*.}" = "cr" ]; then
-  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language Crystal --yes
+  $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${filename}" --no-guess --language Crystal --yes
 elif [ "${filename##*.}" = "vim" ]; then
   ./.vscode/build.sh "$filename" || exit 1
-  BROWSER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${bin}" --no-guess --language Vim --yes
+  $OJ submit "https://atcoder.jp/contests/${contest}/tasks/${task}" "${bin}" --no-guess --language Vim --yes
 fi
