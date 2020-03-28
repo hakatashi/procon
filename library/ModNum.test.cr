@@ -104,4 +104,39 @@ describe "ModNum" do
       ModNum.new(5_i64).sqrt.should eq nil
     end
   end
+
+  describe "#to_s" do
+    it "serializes value as number" do
+      ModNum.new(100_i64).to_s.should eq "100"
+      ModNum.new(123_456_789_i64).to_s.should eq "123456789"
+    end
+  end
+
+  describe "#inspect" do
+    it "serializes value as number" do
+      ModNum.new(100_i64).inspect.should eq "100"
+      ModNum.new(123_456_789_i64).inspect.should eq "123456789"
+    end
+  end
+
+  describe ".factorial" do
+    it "calculates factorial fast" do
+      ModNum.factorial(3_i64).should eq 6
+      ModNum.factorial(10_i64).should eq 3628800
+    end
+  end
+
+  describe ".permutation" do
+    it "calculates permutation fast" do
+      ModNum.permutation(4_i64, 2_i64).should eq 12
+      ModNum.permutation(10_i64, 3_i64).should eq 720
+    end
+  end
+
+  describe ".combination" do
+    it "calculates combination fast" do
+      ModNum.combination(4_i64, 2_i64).should eq 6
+      ModNum.combination(10_i64, 3_i64).should eq 120
+    end
+  end
 end

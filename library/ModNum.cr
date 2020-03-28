@@ -4,16 +4,19 @@
 record ModNum, value : Int64 do
   @@factorials = Array(ModNum).new(100_000_i64) # Change here to improve performance
 
-  def self.permutation(n, k)
-    raise ArgumentError.new("k cannot be greater than n") unless n >= k
+  def self.factorial(n)
     if @@factorials.empty?
       @@factorials << ModNum.new(1_i64)
     end
     @@factorials.size.upto(n) do |i|
       @@factorials << @@factorials.last * i
     end
+    @@factorials[n]
+  end
 
-    @@factorials[n] / @@factorials[n - k]
+  def self.permutation(n, k)
+    raise ArgumentError.new("k cannot be greater than n") unless n >= k
+    factorial(n) / factorial(n - k)
   end
 
   def self.combination(n, k)
@@ -151,11 +154,6 @@ record ModNum, value : Int64 do
     raise NotImplementedError.new(">=")
   end
 
-  def to_s
-    @value.to_s
-  end
-
-  def inspect
-    @value.inspect
-  end
+  delegate to_s, to: @value
+  delegate inspect, to: @value
 end
