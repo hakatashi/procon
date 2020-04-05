@@ -26,7 +26,7 @@ def pow(b, e)
       ret = (ret * b) % MOD
     end
     b = (b * b) % MOD
-    e = e / 2
+    e = e // 2
   end
   ret
 end

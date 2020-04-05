@@ -4,7 +4,7 @@ n = read_line.to_i
 r = Array.new(n) { Array.new(n, 0) }
 def colorize(lower, upper, depth, r)
   size = upper - lower
-  left = size / 2
+  left = size // 2
   right = size - left
 
   if left != 1

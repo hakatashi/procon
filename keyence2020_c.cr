@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 n, k, s = read_line.split.map(&.to_i64)
 ret = [] of Int64
 k.times do

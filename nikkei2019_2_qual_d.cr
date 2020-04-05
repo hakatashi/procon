@@ -40,10 +40,10 @@ class SegmentTree(T)
     @values[index] = value
 
     child = value
-    parent_index = (index + @segments.size - 2) / 2
+    parent_index = (index + @segments.size - 2) // 2
     while parent_index >= 0
       child = @segments[parent_index] = @compare_proc.call(child, @segments[parent_index].not_nil!)
-      parent_index = (parent_index - 1) / 2
+      parent_index = (parent_index - 1) // 2
     end
   end
 
@@ -68,7 +68,7 @@ class SegmentTree(T)
         return @values[segment_index + 1 - @segments.size]
       end
     end
-    range_median = (range.begin + range.end) / 2
+    range_median = (range.begin + range.end) // 2
     child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
     child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
     if !child1.nil? && !child2.nil?

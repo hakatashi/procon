@@ -14,13 +14,13 @@ end
 if x == 0
   interval = 1_i64
 else
-  interval = [(x * 2).lcm(d * 2) / (x * 2).abs, n + 1].min
+  interval = [(x * 2).lcm(d * 2) // (x * 2).abs, n + 1].min
 end
 infoss = Array.new(interval) { [] of Tuple(Symbol, Int64) }
 (n + 1).times do |i|
   a = n - i * 2
-  b_max = n * (n - 1) / 2 - i * (i - 1)
-  b_min = (n - i) * (n - i - 1) - n * (n - 1) / 2
+  b_max = n * (n - 1) // 2 - i * (i - 1)
+  b_min = (n - i) * (n - i - 1) - n * (n - 1) // 2
   max = a * x + b_max * d
   min = a * x + b_min * d
   infoss[i % interval] << {:open, min}
@@ -42,7 +42,7 @@ infoss.each do |infos|
     end
     if depth == 0
       close = v
-      ret += (close - open) / (2 * d) + 1
+      ret += (close - open) // (2 * d) + 1
     end
   end
 end

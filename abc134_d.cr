@@ -3,7 +3,7 @@ def factors(n)
   Math.sqrt(n).to_i.times do |i|
     if n % (i + 1) == 0
       ret << (i + 1).to_u64
-      ret << (n / (i + 1)).to_u64
+      ret << (n // (i + 1)).to_u64
     end
   end
   ret.uniq

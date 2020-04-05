@@ -1,6 +1,6 @@
 def extended_gcd(a, b)
   last_remainder, remainder = a.abs, b.abs
-  x, last_x, y, last_y = 0, 1, 1, 0
+  x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
   while remainder != 0
     new_last_remainder = remainder
     quotient, remainder = last_remainder.divmod(remainder)
@@ -20,7 +20,7 @@ def invmod(e, et)
   x % et
 end
 
-n, k = read_line.split(" ").map(&.to_u64)
+n, k = read_line.split(" ").map(&.to_i64)
 b, r = k, n - k
 k.times do |i|
   k = i + 2
@@ -34,15 +34,15 @@ k.times do |i|
   ret = 1_u64
   if l != 0
     right.times do |i|
-      ret = (ret * (left - i)) % 1000000007
-      ret = (ret * invmod(i + 1, 1000000007)) % 1000000007
+      ret = (ret * (left - i)) % 1000000007_i64
+      ret = (ret * invmod(i + 1, 1000000007_i64)) % 1000000007_i64
     end
   end
   left = b - i - 1 + i
   right = [b - i - 1, i].min
   right.times do |i|
-    ret = (ret * (left - i)) % 1000000007
-    ret = (ret * invmod(i + 1, 1000000007)) % 1000000007
+    ret = (ret * (left - i)) % 1000000007_i64
+    ret = (ret * invmod(i + 1, 1000000007_i64)) % 1000000007_i64
   end
   puts ret
 end

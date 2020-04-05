@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 n, m = read_line.split.map(&.to_i64)
 bombs = [] of Tuple(Int64, Int64)
 codes = [] of Tuple(Int64, Int64)

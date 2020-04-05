@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 boards = [
   [] of String,
   [] of String,
@@ -73,10 +75,10 @@ if n == 3 || n == 4 || n == 5
   exit
 end
 
-step_size = (n - 6) / 4 * 4
+step_size = (n - 6) // 4 * 4
 n.times do |i|
   if i < step_size
-    step = i / 4
+    step = i // 4
     puts "." * (step * 4) + boards[4][i % 4] + "." * (n - (step + 1) * 4)
   else
     puts "." * step_size + boards[n - step_size][i - step_size]

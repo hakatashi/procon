@@ -13,7 +13,7 @@ record ModNum, value : Int64 do
       @@factorials << @@factorials.last * i
     end
 
-    @@factorials[n] / @@factorials[n - k]
+    @@factorials[n] // @@factorials[n - k]
   end
 
   def self.factorial(n)
@@ -22,7 +22,7 @@ record ModNum, value : Int64 do
 
   def self.combination(n, k)
     raise ArgumentError.new("k cannot be greater than n") unless n >= k
-    permutation(n, k) / @@factorials[k]
+    permutation(n, k) // @@factorials[k]
   end
 
   def self.repeated_combination(n, k)
@@ -61,13 +61,17 @@ record ModNum, value : Int64 do
   end
 
   def /(value : ModNum)
-    raise DivisionByZero.new if value == 0
+    raise DivisionByZeroError.new if value == 0
     self * value.inv
   end
 
   def /(value)
-    raise DivisionByZero.new if value == 0
+    raise DivisionByZeroError.new if value == 0
     self * ModNum.new(value.to_i64 % MOD).inv
+  end
+
+  def //(value)
+    self./(value)
   end
 
   def **(value)
@@ -79,7 +83,7 @@ record ModNum, value : Int64 do
         ret *= b
       end
       b *= b
-      e /= 2
+      e //= 2
     end
     ret
   end
@@ -90,18 +94,18 @@ record ModNum, value : Int64 do
 
   def sqrt
     z = ModNum.new(1_i64)
-    until z ** ((MOD - 1) / 2) == MOD - 1
+    until z ** ((MOD - 1) // 2) == MOD - 1
       z += 1
     end
     q = MOD - 1
     m = 0
     while q % 2 == 0
-      q /= 2
+      q //= 2
       m += 1
     end
     c = z ** q
     t = self ** q
-    r = self ** ((q + 1) / 2)
+    r = self ** ((q + 1) // 2)
     m.downto(2) do |i|
       tmp = t ** (2 ** (i - 2))
       if tmp != 1
@@ -155,13 +159,8 @@ record ModNum, value : Int64 do
     raise NotImplementedError.new(">=")
   end
 
-  def to_s
-    @value.to_s
-  end
-
-  def inspect
-    @value.inspect
-  end
+  delegate to_s, to: @value
+  delegate inspect, to: @value
 end
 
 
@@ -189,7 +188,7 @@ def dfs(node, parent, pres, dp)
   pres[node].each do |child|
     next if child == parent
     count, pattern = dp[child].not_nil!
-    ans /= ModNum.factorial(count)
+    ans //= ModNum.factorial(count)
   end
   dp[node] = {count_sum + 1, ans}
 end
@@ -213,11 +212,11 @@ def dfs2(node, parent, pres, dp, anss, dp_par)
     count, pattern = dp[child].not_nil!
     factor *= ModNum.factorial(count)
   end
-  anss[node] = ans * ModNum.factorial(count_sum) / factor
+  anss[node] = ans * ModNum.factorial(count_sum) // factor
   pres[node].each do |child|
     next if child == parent
     count, pattern = dp[child].not_nil!
-    dfs2(child, node, pres, dp, anss, {count_sum - count + 1, ModNum.factorial(count_sum - count) * ans / factor * ModNum.factorial(count) / pattern})
+    dfs2(child, node, pres, dp, anss, {count_sum - count + 1, ModNum.factorial(count_sum - count) * ans // factor * ModNum.factorial(count) // pattern})
   end
 end
 

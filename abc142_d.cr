@@ -1,6 +1,6 @@
 def extended_gcd(a, b)
   last_remainder, remainder = a.abs, b.abs
-  x, last_x, y, last_y = 0, 1, 1, 0
+  x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
   while remainder != 0
     new_last_remainder = remainder
     quotient, remainder = last_remainder.divmod(remainder)
@@ -13,15 +13,15 @@ def extended_gcd(a, b)
 end
 
 
-a, b = read_line.split.map(&.to_u64)
+a, b = read_line.split.map(&.to_i64)
 gcd, _ = extended_gcd(a, b)
-ret = 1
-i = 2_u64
+ret = 1_i64
+i = 2_i64
 while i * i <= gcd
   if gcd % i == 0
     ret += 1
     while gcd % i == 0
-      gcd = gcd / i
+      gcd = gcd // i
     end
   end
   i += 1

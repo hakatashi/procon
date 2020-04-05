@@ -6,9 +6,9 @@ ais.each do |a|
 end
 ans = 0_i64
 counts.each do |v, c|
-  ans += c * (c - 1) / 2
+  ans += c * (c - 1) // 2
 end
 ais.each do |a|
   c = counts[a]
-  p ans - c * (c - 1) / 2 + (c - 1) * (c - 2) / 2
+  p ans - c * (c - 1) // 2 + (c - 1) * (c - 2) // 2
 end

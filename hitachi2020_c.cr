@@ -21,10 +21,10 @@ counts = [0_i64, 0_i64]
 dfs1(0, -1, pres, counts, 0_i64)
 
 def dfs2(node, parent, pres, ans, depth, info, n, counts)
-  if counts[depth % 2] <= n / 3
+  if counts[depth % 2] <= n // 3
     ans[node] = info[0]
     info[0] += 3
-  elsif counts[(depth + 1) % 2] <= n / 3
+  elsif counts[(depth + 1) % 2] <= n // 3
     if info[1] <= n
       ans[node] = info[1]
       info[1] += 3

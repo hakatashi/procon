@@ -5,7 +5,7 @@ def factorize(n)
   h = Hash(Int64, Int64).new(0_i64)
   until i * i > n
     if n % i == 0
-      n = n / i
+      n = n // i
       h[i] += 1
     else
       i += 1
@@ -27,7 +27,7 @@ Array.each_product(f) do |pr|
   next if v == 1
   cn = n
   while cn % v == 0
-    cn = cn / v
+    cn = cn // v
   end
   if cn % v == 1
     ans += 1

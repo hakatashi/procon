@@ -3,4 +3,4 @@ if (a - b) % 2 == 1
   puts "IMPOSSIBLE"
   exit
 end
-puts (a - b).abs / 2 + [a, b].min
+puts (a - b).abs // 2 + [a, b].min

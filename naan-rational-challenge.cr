@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 require "big"
 require "set"
 

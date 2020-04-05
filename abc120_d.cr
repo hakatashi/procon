@@ -46,7 +46,7 @@ m.times do
   a, b = read_line.split.map(&.to_i)
   queries << {a - 1, b - 1}
 end
-ret = n.to_u64 * (n.to_u64 - 1) / 2
+ret = n.to_u64 * (n.to_u64 - 1) // 2
 results = [] of UInt64
 tree = UnionFindTree.new(n)
 queries.reverse.each do |(a, b)|

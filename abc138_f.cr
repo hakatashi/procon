@@ -30,7 +30,7 @@ def pow(b : UInt64, e : UInt64)
       ret = (ret * b) % mod
     end
     b = (b * b) % mod
-    e = e / 2
+    e = e // 2
   end
   ret
 end

@@ -12,7 +12,7 @@ class PriorityQueue(T)
     @heap << v
     index = @heap.size - 1
     while index != 0
-      parent = (index - 1) / 2
+      parent = (index - 1) // 2
       if @heap[parent] >= @heap[index]
         break
       end
@@ -63,7 +63,7 @@ ais.each {|a| q << a}
 
 m.times do
   m = q.pop.not_nil!
-  q << m / 2
+  q << m // 2
 end
 
 ret = 0_u64

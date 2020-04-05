@@ -33,7 +33,7 @@ if (x + y) % 3 != 0
   p 0
   exit
 end
-depth = ((x + y) / 3_i64).to_i64
+depth = ((x + y) // 3_i64).to_i64
 if x < depth || y < depth
   p 0
   exit

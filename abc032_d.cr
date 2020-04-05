@@ -12,8 +12,8 @@ def maximize(i, cv, cw, loads, total)
 end
 
 n, total = read_line.split(' ').map(&.to_i)
-max_v = 0
-max_w = 0
+max_v = 0_u64
+max_w = 0_u64
 loads = STDIN.gets_to_end.split('\n').reject(&.empty?).map do |line|
   v, w = line.split(' ').map(&.to_u64)
   max_v = [max_v, v].max
@@ -36,6 +36,4 @@ if max_w <= 1000
   end
   puts dp.max
   exit
-end
-if max_v <= 1000
 end

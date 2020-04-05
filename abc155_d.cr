@@ -58,6 +58,6 @@ ans = (-1_000_000_000_000_000_000_i64..1_000_000_000_000_000_000_i64).bsearch do
       ret += (negatives.size - 1 - ptr) * 2
     end
   end
-  ret / 2 >= k
+  ret // 2 >= k
 end
 p ans

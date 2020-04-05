@@ -1,3 +1,5 @@
+# -*- status: pending -*-
+
 n, m, v, pe = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64).sort.reverse
 sums = [0]

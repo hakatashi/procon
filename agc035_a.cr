@@ -15,11 +15,11 @@ end
 vs = Array(UInt64).new
 counts.each do |c|
   n, count = c
-  if count % (ais.size / 3) != 0
+  if count % (ais.size // 3) != 0
     puts "No"
     exit
   end
-  (count / (ais.size / 3)).times do
+  (count // (ais.size // 3)).times do
     vs << n
   end
 end

@@ -28,7 +28,7 @@ s.chars.each do |c|
   is_prev_start = is_start
 end
 
-(s.size / 2).times do |i|
+(s.size // 2).times do |i|
   ret = (ret * (i + 1)) % MOD
 end
 

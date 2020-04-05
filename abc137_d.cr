@@ -12,7 +12,7 @@ class PriorityQueue(T)
     @heap << v
     index = @heap.size - 1
     while index != 0
-      parent = (index - 1) / 2
+      parent = (index - 1) // 2
       if @heap[parent] >= @heap[index]
         break
       end

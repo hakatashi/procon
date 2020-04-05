@@ -5,7 +5,7 @@ def pow(b, e, m)
       ret = (ret * b) % m
     end
     b = (b * b) % m
-    e = e / 2
+    e = e // 2
   end
   ret
 end

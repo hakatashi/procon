@@ -1,3 +1,5 @@
+# -*- status: skip -*-
+
 n, m = read_line.split.map(&.to_i)
 sss = Array(Array(Char)).new
 enemies = [] of Tuple(Int32, Int32)

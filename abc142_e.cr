@@ -7,7 +7,7 @@ m.times do
   cs = read_line.split.map(&.to_u64)
   css << cs
 end
-dp = Array(UInt64).new(2 ** n, UInt64::MAX / 2)
+dp = Array(UInt64).new(2 ** n, UInt64::MAX // 2)
 dp[0] = 0_u64
 ais.each_with_index do |a, i|
   bitmask = 0
@@ -18,7 +18,7 @@ ais.each_with_index do |a, i|
     dp[i | bitmask] = [d + a, dp[i | bitmask]].min
   end
 end
-if dp.last >= UInt64::MAX / 2
+if dp.last >= UInt64::MAX // 2
   puts "-1"
 else
   puts dp.last

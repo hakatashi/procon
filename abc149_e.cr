@@ -5,7 +5,7 @@ ais.each do |a|
   sums << sums.last + a
 end
 
-ret = (0..(ais.first * 2 + 1)).bsearch do |i|
+ret = (0_i64..(ais.first * 2 + 1)).bsearch do |i|
   count = 0_i64
   ais.each_with_index do |a, j|
     search = ais.bsearch_index {|a2| a2 < i - a}

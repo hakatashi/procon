@@ -21,6 +21,12 @@ end
 
 n, k = read_line.split.map(&.to_i64)
 
+facs = Array(Int64).new(500_100_i64)
+facs << 1_i64
+1_i64.upto(500_000_i64) do |i|
+  facs << (facs.last * i) % MOD
+end
+
 ans = (facs[2 * n - 1] * invmod(facs[n])) % MOD
 ans = (ans * invmod(facs[n - 1])) % MOD
 

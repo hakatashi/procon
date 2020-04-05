@@ -26,7 +26,7 @@ monsters.each_with_index do |(x, h), i|
 
   next if damage >= h
 
-  bomb = ((h - damage).to_f / a.to_f).ceil.to_i64
+  bomb = ((h - damage).to_f // a.to_f).ceil.to_i64
   ans += bomb
   damage += a * bomb
   resets << {x + d * 2, a * bomb}

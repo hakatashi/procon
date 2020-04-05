@@ -18,7 +18,7 @@ if a1 * t1 > b1 * t1
   exit
 end
 
-ret = (b1 * t1 - a1 * t1) / ((a1 * t1 + a2 * t2) - (b1 * t1 + b2 * t2)) * 2 + 1
+ret = (b1 * t1 - a1 * t1) // ((a1 * t1 + a2 * t2) - (b1 * t1 + b2 * t2)) * 2 + 1
 if (b1 * t1 - a1 * t1) % ((a1 * t1 + a2 * t2) - (b1 * t1 + b2 * t2)) == 0
   ret -= 1
 end

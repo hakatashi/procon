@@ -12,6 +12,6 @@ end
 ret = 0_u64
 map.each do |v|
   s, a = v
-  ret += a * (a - 1) / 2
+  ret += a * (a - 1) // 2
 end
 p ret

@@ -10,10 +10,10 @@ xs_with_index.each_with_index do |xd, sort_i|
 end
 xs.size.times do |i|
   index = m[i]
-  if index < xs.size / 2
-    p xs_with_index[xs.size / 2][1]
+  if index < xs.size // 2
+    p xs_with_index[xs.size // 2][1]
   else
-    p xs_with_index[xs.size / 2 - 1][1]
+    p xs_with_index[xs.size // 2 - 1][1]
   end
 end
 

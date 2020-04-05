@@ -64,7 +64,7 @@ if n >= 3
         ee = e * e
         ff = f * f
 
-        py = ((e - a) * (aa + bb - cc - dd) - (c - a) * (aa + bb - ee- ff)) / (2 * (e - a)*(b - d) - 2 * (c - a) * (b - f))
+        py = ((e - a) * (aa + bb - cc - dd) - (c - a) * (aa + bb - ee - ff)) / (2 * (e - a) * (b - d) - 2 * (c - a) * (b - f))
         if c == a
           px = (2 * (b - f) * py - aa - bb + ee + ff) / (2 * (e - a))
         else
