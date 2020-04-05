@@ -1,5 +1,10 @@
 language: python
 dist: bionic
+addons:
+  apt:
+    update: true
+    packages:
+      - libevent-dev
 python:
   - 3.7
 install:
