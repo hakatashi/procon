@@ -13,8 +13,8 @@ cat "$sample"
 echo ""
 
 echo "=== Output ==="
-if [ -d /usr/local/share/crystal-0.20.5-1 ] || [ -d /tmp/crystal-0.20.5-1 ]; then
+if [ -d /usr/local/share/crystal-0.33.0-1 ] || [ -d /tmp/crystal-0.33.0-1 ]; then
   "${bin}" < "$sample" | tee out.txt
 else
-  docker run -v "$PWD":/mnt -i crystallang/crystal:0.20.5 "/mnt/${bin}" < $sample | tee out.txt
+  docker run -v "$PWD":/mnt -i crystallang/crystal:0.33.0 "/mnt/${bin}" < $sample | tee out.txt
 fi
