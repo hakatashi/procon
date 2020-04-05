@@ -73,15 +73,15 @@ describe "ModNum" do
   describe "#/" do
     it "divides with number" do
       n = ModNum.new(700_i64)
-      (n / 5).should eq 140
-      (n / -1).should eq -700 % MOD
-      (n / 10_000_000_000_i64).should eq -10 % MOD
+      (n // 5).should eq 140
+      (n // -1).should eq -700 % MOD
+      (n // 10_000_000_000_i64).should eq -10 % MOD
     end
 
     it "generates number that multiplies with self into the original one" do
       1_i64.step(by: 9_837, to: 100_000) do |i|
         1_000_000_i64.step(by: 9_837, to: 100_000) do |j|
-          (ModNum.new(i) / j * j).should eq i
+          (ModNum.new(i) // j * j).should eq i
         end
       end
     end
@@ -92,7 +92,7 @@ describe "ModNum" do
       n = ModNum.new(5_i64)
       (n ** 0).should eq 1
       (n ** 5).should eq 3125
-      (n ** -3).should eq ModNum.new(1_i64) / 125
+      (n ** -3).should eq ModNum.new(1_i64) // 125
       (n ** 100_000).should eq 754_573_817
     end
   end

@@ -16,12 +16,12 @@ record ModNum, value : Int64 do
 
   def self.permutation(n, k)
     raise ArgumentError.new("k cannot be greater than n") unless n >= k
-    factorial(n) / factorial(n - k)
+    factorial(n) // factorial(n - k)
   end
 
   def self.combination(n, k)
     raise ArgumentError.new("k cannot be greater than n") unless n >= k
-    permutation(n, k) / @@factorials[k]
+    permutation(n, k) // @@factorials[k]
   end
 
   def self.repeated_combination(n, k)
@@ -60,13 +60,17 @@ record ModNum, value : Int64 do
   end
 
   def /(value : ModNum)
-    raise DivisionByZero.new if value == 0
+    raise DivisionByZeroError.new if value == 0
     self * value.inv
   end
 
   def /(value)
-    raise DivisionByZero.new if value == 0
+    raise DivisionByZeroError.new if value == 0
     self * ModNum.new(value.to_i64 % MOD).inv
+  end
+
+  def //(value)
+    self./(value)
   end
 
   def **(value)
@@ -78,7 +82,7 @@ record ModNum, value : Int64 do
         ret *= b
       end
       b *= b
-      e /= 2
+      e //= 2
     end
     ret
   end
@@ -89,18 +93,18 @@ record ModNum, value : Int64 do
 
   def sqrt
     z = ModNum.new(1_i64)
-    until z ** ((MOD - 1) / 2) == MOD - 1
+    until z ** ((MOD - 1) // 2) == MOD - 1
       z += 1
     end
     q = MOD - 1
     m = 0
     while q % 2 == 0
-      q /= 2
+      q //= 2
       m += 1
     end
     c = z ** q
     t = self ** q
-    r = self ** ((q + 1) / 2)
+    r = self ** ((q + 1) // 2)
     m.downto(2) do |i|
       tmp = t ** (2 ** (i - 2))
       if tmp != 1

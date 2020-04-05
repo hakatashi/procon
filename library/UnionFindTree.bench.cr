@@ -27,7 +27,7 @@ describe "UnionFindTree" do
       tree.unite(0, 1)
       tree.unite(1, 2)
 
-      tree.size(n / 2).should eq (n + 1) * 3
+      tree.size(n // 2).should eq (n + 1) * 3
     end
   end
 end
