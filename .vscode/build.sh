@@ -1,5 +1,9 @@
 filename="$1"
-output="bin/${filename%.*}"
+if [ "$#" = 1 ]; then
+  output="bin/${filename%.*}"
+else
+  output="$2"
+fi
 
 if [ "${filename##*.}" = "cpp" ]; then
   if [ "$filename" -nt "${output}" ]; then

@@ -19,8 +19,8 @@ class UnionFindTree
   end
 
   def unite(a, b)
-    root_a = root(a)
-    root_b = root(b)
+    root_a = root(a.to_i32)
+    root_b = root(b.to_i32)
     unless root_a == root_b
       if @sizes[root_a] < @sizes[root_b]
         root_a, root_b = root_b, root_a
