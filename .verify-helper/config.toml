@@ -1,5 +1,5 @@
 [languages.cr]
-compile = "bash .vscode/build.sh {path} {basedir}/a.out"
+compile = "bash .vscode/build.sh {path} {basedir}/a.out --release"
 execute = "{basedir}/a.out"
 bundle = "false"
 list_dependencies = "true"
