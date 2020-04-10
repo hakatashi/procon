@@ -42,7 +42,25 @@ class SegmentTree(T)
     child = value
     parent_index = (index + @segments.size - 2) // 2
     while parent_index >= 0
-      child = @segments[parent_index] = @compare_proc.call(child, @segments[parent_index].not_nil!)
+      i = parent_index
+      child1 = nil.as(T | Nil)
+      child2 = nil.as(T | Nil)
+      if i * 2 + 2 < @segments.size
+        child1 = @segments[i * 2 + 1]
+        child2 = @segments[i * 2 + 2]
+      else
+        if i * 2 + 2 - @segments.size < @values.size
+          child1 = @values[i * 2 + 2 - @segments.size]
+        end
+        if i * 2 + 3 - @segments.size < @values.size
+          child2 = @values[i * 2 + 3 - @segments.size]
+        end
+      end
+      if !child1.nil? && !child2.nil?
+        @segments[i] = @compare_proc.call(child1, child2)
+      elsif !child1.nil? && child2.nil?
+        @segments[i] = child1
+      end
       parent_index = (parent_index - 1) // 2
     end
   end
