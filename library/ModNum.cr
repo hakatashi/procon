@@ -42,6 +42,10 @@ record ModNum, value : Int64 do
     return last_remainder, last_x * (a < 0 ? -1 : 1)
   end
 
+  def self.zero
+    ModNum.new(0_i64)
+  end
+
   def inv
     g, x = ModNum.extended_gcd(@value, MOD)
     ModNum.new(x % MOD)
