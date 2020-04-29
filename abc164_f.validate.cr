@@ -25,7 +25,7 @@ ss.zip(us).each_with_index do |(s, u), y|
     result = (0...n).map {|x| ais[y * n + x]}.reduce {|a, b| a | b}
   end
   unless result == u
-    puts "Invalid"
+    puts "WA"
     exit
   end
 end
@@ -38,9 +38,9 @@ ts.zip(vs).each_with_index do |(t, v), x|
     result = (0...n).map {|y| ais[y * n + x]}.reduce {|a, b| a | b}
   end
   unless result == v
-    puts "Invalid"
+    puts "WA"
     exit
   end
 end
 
-puts "Valid"
+puts "AC"
