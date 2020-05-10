@@ -201,6 +201,17 @@ class RedBlackTree
     x
   end
 
+  def lower_than(key, x = root)
+    while !x.nil_node? && x.key != key
+      tmp = (key < x.key) ? x.left : x.right
+      if tmp.nil_node?
+        return x
+      end
+      x = tmp
+    end
+    x
+  end
+
   def empty?
     self.root.nil_node?
   end
