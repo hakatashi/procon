@@ -1,3 +1,4 @@
+# -*- status: skip -*-
 n, m = read_line.split.map(&.to_i64)
 x = (m + 1) // 2
 y = x * 2 + m // 2
