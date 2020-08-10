@@ -1,21 +1,21 @@
-puts "39362"
+$queries = []
 
 $ptr = 3
 
 def add(a, b)
   tmp = $ptr
-  puts "+ #{a} #{b} #{tmp}"
+  $queries << "+ #{a} #{b} #{tmp}"
   $ptr += 1
   tmp
 end
 
 def addmov(a, b)
-  puts "+ #{a} #{b} #{a}"
+  $queries << "+ #{a} #{b} #{a}"
 end
 
 def gt(a, b)
   tmp = $ptr
-  puts "< #{a} #{b} #{tmp}"
+  $queries << "< #{a} #{b} #{tmp}"
   $ptr += 1
   tmp
 end
@@ -55,19 +55,14 @@ b = 1
 $zero = gt(0, 2)
 $one = gt(2, 0)
 
-pow2 = [$one]
-32.times do |i|
-  pow2 << add(pow2.last, pow2.last)
-end
-
 pow2m1 = [$zero]
-32.times do |i|
+30.times do |i|
   pow2m1 << add(add(pow2m1.last, pow2m1.last), $one)
 end
 
 a_bits = []
 ret = $zero
-31.downto(0) do |i|
+29.downto(0) do |i|
   bit = gt(add(ret, pow2m1[i]), a)
   ret = add(ret, _if(bit, 2 ** i))
   a_bits << bit
@@ -76,16 +71,35 @@ a_bits.reverse!
 
 b_bits = []
 ret = $zero
-31.downto(0) do |i|
+29.downto(0) do |i|
   bit = gt(add(ret, pow2m1[i]), b)
   ret = add(ret, _if(bit, 2 ** i))
   b_bits << bit
 end
 b_bits.reverse!
 
-32.times do |ai|
-  32.times do |bi|
-    addmov(2, _if(_and(a_bits[ai], b_bits[bi]), 2 ** (ai + bi)))
+c_bits = []
+60.times do
+  c_bits << $ptr
+  $ptr += 1
+end
+
+30.times do |ai|
+  30.times do |bi|
+    addmov(c_bits[ai + bi], _and(a_bits[ai], b_bits[bi]))
   end
 end
 
+ret = $zero
+c_bits.reverse_each do |c_bit|
+  ret = add(ret, ret)
+  ret = add(ret, c_bit)
+end
+
+addmov(2, ret)
+
+
+p $queries.size
+$queries.each do |query|
+  puts query
+end
