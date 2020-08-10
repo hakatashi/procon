@@ -36,7 +36,7 @@ fi
 
 TEST_DIR="tests/$task"
 
-if [ "$ext" == "cr" ]; then
+if [ "$ext" == "cr" ] || [ "$ext" == "cpp" ]; then
   if [ -d /usr/local/share/crystal-0.33.0-1 ] || [ -d /tmp/crystal-0.33.0-1 ]; then
     $OJ test $TESTFLAGS -t 3 --directory "${TEST_DIR}" --command "${bin}"
   else
