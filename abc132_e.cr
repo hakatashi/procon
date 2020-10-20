@@ -1,41 +1,28 @@
-n, m = read_line.split(" ").map(&.to_i)
-edges = Array(NamedTuple(u: Int32, v: Int32)).new
-precedings = Hash(Int32, Array(Int32)).new
-n.times do |i|
-  precedings[i + 1] = Array(Int32).new
-end
+n, m = read_line.split.map(&.to_i64)
+nodes = [] of Tuple(Int64, Int64)
+pres = Array(Array(Int64)).new(n) { [] of Int64 }
 m.times do
-  u, v = read_line.split(" ").map(&.to_i)
-  edges << {u: u, v: v}
-  precedings[u] << v
+  u, v = read_line.split.map(&.to_i64)
+  nodes << {u - 1, v - 1}
+  pres[u - 1] << v - 1
 end
-s, t = read_line.split(" ").map(&.to_i)
-visited = Hash(Int32, Int32).new
-queue = [s]
-visited[s] = 0
-while queue.size > 0
-  n = queue.shift
-  reachables = [n]
-  3.times do
-    seen = Set(Int32).new
-    reachables.each do |n|
-      precedings[n].each do |n2|
-        next if seen.includes? n2
-        seen << n2
-      end
-    end
-    reachables = seen.to_a
-  end
-  reachables.each do |n2|
-    if n2 == t
-      puts visited[n] + 1
+s, t = read_line.split.map(&.to_i64)
+
+queue = Deque(Tuple(Int64, Int64, Int64)).new
+visited = Set(Tuple(Int64, Int64)).new
+queue << {s - 1, 0_i64, 0_i64}
+visited << {s - 1, 0_i64}
+until queue.empty?
+  node, mod, depth = queue.shift
+  pres[node].each do |child|
+    new_mod = (mod + 1) % 3
+    if new_mod == 0 && child == t - 1
+      p (depth + 1) // 3
       exit
     end
-    unless visited.has_key? n2
-      queue << n2
-      visited[n2] = visited[n] + 1
-    end
+    next if visited.includes?({child, new_mod})
+    visited << {child, new_mod}
+    queue << {child, new_mod, depth + 1}
   end
 end
-puts -1
-
+p -1
