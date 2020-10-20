@@ -28,7 +28,7 @@ fi
 
 ./.vscode/build.sh "$filename" || exit 1
 
-TESTFLAGS=
+TESTFLAGS=--ignore-spaces
 if grep -q -i 'mode: float' "$filename"; then
   echo "Setting testing mode to float..."
   TESTFLAGS+=" --error 0.000001"
