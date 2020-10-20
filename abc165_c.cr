@@ -5,7 +5,7 @@ q.times do
   queries << {a, b, c, d}
 end
 ans = (1_i64..(n + m - 1)).to_a.each_combination(n).max_of do |ais|
-  ais.map_with_index! {|c, i| c - i}
+  ais.map_with_index! { |c, i| c - i }
   queries.sum do |(a, b, c, d)|
     ais[b - 1] - ais[a - 1] == c ? d : 0_i64
   end

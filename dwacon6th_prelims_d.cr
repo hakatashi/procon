@@ -5,7 +5,7 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
-    initialize(values) {|a, b| a > b ? a : b}
+    initialize(values) { |a, b| a > b ? a : b }
   end
 
   def initialize(values : Array(T), &block : T, T -> T)
@@ -104,7 +104,6 @@ class SegmentTree(T)
   end
 end
 
-
 n = read_line.to_i64
 ais = read_line.split.map(&.to_i64)
 
@@ -114,7 +113,7 @@ ais.each do |a|
 end
 
 n.times do |i|
-  perm = (0...n).to_a.select {|v| v != i}
+  perm = (0...n).to_a.select { |v| v != i }
   ans = [] of Int64
   ans << i
   tree = SegmentTree(Int64).new(counts)
@@ -126,7 +125,7 @@ n.times do |i|
       ans << take.to_i64
       perm.delete(take)
     else
-      take = perm.index {|v| v != ais[ans.last] - 1}
+      take = perm.index { |v| v != ais[ans.last] - 1 }
       if take.nil?
         break
       else
@@ -137,7 +136,7 @@ n.times do |i|
   end
 
   if ans.size == n
-    puts ans.map {|v| v + 1} .join(" ")
+    puts ans.map { |v| v + 1 }.join(" ")
     exit
   end
 end

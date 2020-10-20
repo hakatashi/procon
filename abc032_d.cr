@@ -7,7 +7,7 @@ def maximize(i, cv, cw, loads, total)
   end
   [
     maximize(i + 1, cv + loads[i][:v], cw + loads[i][:w], loads, total),
-    maximize(i + 1, cv, cw, loads, total)
+    maximize(i + 1, cv, cw, loads, total),
   ].max
 end
 

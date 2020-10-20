@@ -8,7 +8,7 @@ end
 ret = (0_i64..(ais.first * 2 + 1)).bsearch do |i|
   count = 0_i64
   ais.each_with_index do |a, j|
-    search = ais.bsearch_index {|a2| a2 < i - a}
+    search = ais.bsearch_index { |a2| a2 < i - a }
     if search.nil?
       count += n
     else
@@ -22,8 +22,8 @@ pushed = 0_i64
 ans = 0_i64
 
 ais.each_with_index do |a, j|
-  search1 = ais.bsearch_index {|a2| a2 <= ret - a}
-  search2 = ais.bsearch_index {|a2| a2 < ret - a}
+  search1 = ais.bsearch_index { |a2| a2 <= ret - a }
+  search2 = ais.bsearch_index { |a2| a2 < ret - a }
   if search1.nil?
     search1 = n
   end

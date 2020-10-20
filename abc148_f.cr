@@ -6,6 +6,7 @@ pres = Array(Array(Int32)).new(n) { [] of Int32 }
   pres[b - 1] << a - 1
 end
 prevs = Array(Int32).new(n, -1)
+
 def dfs(node, prev, pres, prevs, leaves)
   count = 0
   pres[node].each do |i|
@@ -19,6 +20,7 @@ def dfs(node, prev, pres, prevs, leaves)
     leaves << node
   end
 end
+
 leaves = [] of Int32
 dfs(v - 1, -1, pres, prevs, leaves)
 path = Set(Int32).new
@@ -29,6 +31,7 @@ until prev == -1
   prev = prevs[prev]
 end
 ret = 0
+
 def dfs2(node, prev, pres, len, path, depth, ret)
   count = 0
   if path.includes?(node)
@@ -43,12 +46,13 @@ def dfs2(node, prev, pres, len, path, depth, ret)
   if count == 0
     shared = len
     me = depth - shared
-    you = path.size - 1 - len 
+    you = path.size - 1 - len
     if shared > you
       ret << depth - 1
     end
   end
 end
+
 ret = [] of Int32
 dfs2(v - 1, -1, pres, -1, path, 0, ret)
 p ret.max

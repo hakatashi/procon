@@ -229,6 +229,5 @@ alias Mint = ModInt1000000007
 
 include AtCoder
 
-
 n = read_line.to_i64
 p Mint.new(10) ** n - Mint.new(9) ** n * 2 + Mint.new(8) ** n

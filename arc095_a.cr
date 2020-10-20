@@ -1,6 +1,6 @@
 gets
 xs = read_line.split(" ").map(&.to_u64)
-xs_with_index = xs.map_with_index { |x, i| [i, x] } .to_a.sort_by! do |xd|
+xs_with_index = xs.map_with_index { |x, i| [i, x] }.to_a.sort_by! do |xd|
   xd[1]
 end
 m = Hash(UInt64, UInt64).new
@@ -16,4 +16,3 @@ xs.size.times do |i|
     p xs_with_index[xs.size // 2 - 1][1]
   end
 end
-

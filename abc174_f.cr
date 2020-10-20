@@ -5,7 +5,7 @@ q.times do
   l, r = read_line.split.map(&.to_i64)
   queries << {l, r}
 end
-sqrt_n = (1_i64..n).bsearch {|i| i * i >= n}
+sqrt_n = (1_i64..n).bsearch { |i| i * i >= n }
 queries.sort_by! do |(l, r)|
   {l // sqrt_n, r}
 end

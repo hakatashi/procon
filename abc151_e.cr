@@ -48,4 +48,3 @@ ais.each_cons(2).with_index do |(a, b), i|
 end
 
 p ans
-

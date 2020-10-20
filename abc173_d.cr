@@ -42,10 +42,10 @@ class PriorityQueue(T)
     index = 0
     while index * 2 + 1 < @heap.size
       child = if index * 2 + 2 < @heap.size && @priority_proc.call(@heap[index * 2 + 1]) < @priority_proc.call(@heap[index * 2 + 2])
-        index * 2 + 2
-      else
-        index * 2 + 1
-      end
+                index * 2 + 2
+              else
+                index * 2 + 1
+              end
       if @priority_proc.call(@heap[index]) >= @priority_proc.call(@heap[child])
         break
       end
@@ -57,7 +57,6 @@ class PriorityQueue(T)
 
   delegate :empty?, to: @heap
 end
-
 
 gets
 ais = read_line.split.map(&.to_i64).sort!.reverse!

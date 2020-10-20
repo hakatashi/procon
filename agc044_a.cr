@@ -1,10 +1,13 @@
 require "big"
 t = read_line.to_i64
+
 class Solve
   getter :dp
+
   def initialize(@a : Int64, @b : Int64, @c : Int64, @d : Int64)
     @dp = Hash(Int64, Int64).new
   end
+
   def solve(n)
     return 0_i64 if n == 0
     return @d if n == 1
@@ -44,6 +47,7 @@ class Solve
     ans
   end
 end
+
 t.times do
   n, a, b, c, d = read_line.split.map(&.to_i64)
   solve = Solve.new(a, b, c, d)

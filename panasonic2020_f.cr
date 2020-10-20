@@ -1,6 +1,7 @@
 def min(a, b)
   a > b ? b : a
 end
+
 q = read_line.to_i64
 q.times do
   a, b, c, d = read_line.split.map(&.to_i64)

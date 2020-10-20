@@ -17,6 +17,7 @@ def dfs1(node, parent, pres, counts, depth)
     dfs1(child, node, pres, counts, depth + 1)
   end
 end
+
 counts = [0_i64, 0_i64]
 dfs1(0, -1, pres, counts, 0_i64)
 

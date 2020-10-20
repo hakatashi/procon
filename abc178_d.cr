@@ -227,6 +227,5 @@ AtCoder.static_modint(ModInt998244353, 998_244_353_i64)
 
 alias Mint = AtCoder::ModInt1000000007
 
-
 n = read_line.to_i64
-p 1_i64.upto(n // 3).sum {|i| Mint.repeated_combination(i, n - i * 3)}
+p 1_i64.upto(n // 3).sum { |i| Mint.repeated_combination(i, n - i * 3) }

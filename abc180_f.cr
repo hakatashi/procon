@@ -227,7 +227,6 @@ AtCoder.static_modint(ModInt998244353, 998_244_353_i64)
 
 alias Mint = AtCoder::ModInt1000000007
 
-
 INF = 1_000_000_000_000_000_000_i64
 
 n, m, l = read_line.split.map(&.to_i64)
@@ -256,7 +255,7 @@ class Dfs
     if @cache.has_key?(cache_key)
       return @cache[cache_key]
     end
-    
+
     res = Mint.new(0_i64)
 
     1_i64.upto(remains // take) do |i|

@@ -4,7 +4,7 @@ n.times do
   x, h = read_line.split.map(&.to_i64)
   monsters << {x, h}
 end
-monsters.sort_by! {|(x, h)| x}
+monsters.sort_by! { |(x, h)| x }
 ans = 0_i64
 resets = [] of Tuple(Int64, Int64)
 damage = 0_i64

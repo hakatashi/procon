@@ -30,4 +30,4 @@ h.times do |y|
     dps << dp
   end
 end
-p (0..30000).select {|i| dpss[h - 1][w - 1].bit(i) == 1}.min_of {|b| (15000 - b).abs}
+p (0..30000).select { |i| dpss[h - 1][w - 1].bit(i) == 1 }.min_of { |b| (15000 - b).abs }

@@ -17,12 +17,13 @@ class Dfs
       p a
     end
   end
+
   def dfs(node, parent)
     @ans[node] = @dp.size.to_i64
     @pres[node].each do |child|
       next if child == parent
       a = @ais[child]
-      i = @dp.bsearch_index {|d| d >= a}
+      i = @dp.bsearch_index { |d| d >= a }
       if i.nil?
         @dp << a
         dfs(child, node)
@@ -36,4 +37,5 @@ class Dfs
     end
   end
 end
+
 Dfs.new(ais, pres)

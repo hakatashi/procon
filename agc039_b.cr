@@ -10,6 +10,7 @@ n.times do
   sss << ss
 end
 colors = Array(Bool | Nil).new(n, nil)
+
 def dfs(sss, colors, index)
   new_color = !colors[index]
   sss[index].each do |preceding|
@@ -25,6 +26,7 @@ def dfs(sss, colors, index)
   end
   return true
 end
+
 colors[0] = true
 result = dfs(sss, colors, 0)
 if result == false

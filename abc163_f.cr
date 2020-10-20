@@ -13,6 +13,7 @@ class Dfs
     @ans = Array(Int64).new(n, n * (n + 1) / 2)
     @segments = Array(Int64).new(n, n)
   end
+
   def dfs(node, parent, segments)
     cnt = 1_i64
     @pres[node].each do |child|
@@ -20,7 +21,7 @@ class Dfs
       ncnt, _ = dfs(child, node)
       cnt += ncnt
     end
-    hidden[@cs[node]] 
+    hidden[@cs[node]]
     {cnt, cnt}
   end
 end

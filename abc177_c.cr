@@ -152,12 +152,15 @@ record ModNum, value : Int64 do
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def <=(value)
     raise NotImplementedError.new("<=")
   end
+
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def >=(value)
     raise NotImplementedError.new(">=")
   end
@@ -166,8 +169,7 @@ record ModNum, value : Int64 do
   delegate inspect, to: @value
 end
 
-
 MOD = 1_000_000_007_i64
 n = read_line.to_i64
-ais = read_line.split.map {|n| ModNum.new(n.to_i64)}
-p (ais.sum ** 2 - ais.map {|n| n ** 2}.sum) // 2
+ais = read_line.split.map { |n| ModNum.new(n.to_i64) }
+p (ais.sum ** 2 - ais.map { |n| n ** 2 }.sum) // 2

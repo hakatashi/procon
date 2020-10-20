@@ -1,5 +1,5 @@
-TWO = 2_i64
-ONE = 1_i64
+TWO  = 2_i64
+ONE  = 1_i64
 ZERO = 0_i64
 
 MOD = 1000000007_i64

@@ -20,7 +20,6 @@ def factorize(n)
       n = n // i
       h[i] += 1
     else
-
       i += 1
     end
   end
@@ -30,10 +29,9 @@ def factorize(n)
   h
 end
 
-
 n = read_line.to_i64
 factors = factorize(n * 2)
-fs = factors.to_a.map {|n, x| n ** x}
+fs = factors.to_a.map { |n, x| n ** x }
 ans = 1_000_000_000_000_000_000_i64
 Array.each_product([[false, true]] * fs.size) do |prod|
   a = 1_i64

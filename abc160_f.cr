@@ -149,12 +149,15 @@ record ModNum, value : Int64 do
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def <=(value)
     raise NotImplementedError.new("<=")
   end
+
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def >=(value)
     raise NotImplementedError.new(">=")
   end
@@ -162,7 +165,6 @@ record ModNum, value : Int64 do
   delegate to_s, to: @value
   delegate inspect, to: @value
 end
-
 
 MOD = 1_000_000_007_i64
 

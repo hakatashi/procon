@@ -16,7 +16,7 @@ n.times do |i|
   queries << {x - 1, y - 1}
   query_dict[x - 1] = i
 end
-queries.sort_by! {|(x, y)| x}
+queries.sort_by! { |(x, y)| x }
 acc = 0_i64
 box_count = 0_i64
 box_size = 0_i64

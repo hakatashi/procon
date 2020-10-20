@@ -12,7 +12,6 @@ def extended_gcd(a, b)
   return last_remainder, last_x * (a < 0 ? -1 : 1)
 end
 
-
 a, b = read_line.split.map(&.to_i64)
 gcd, _ = extended_gcd(a, b)
 ret = 1_i64

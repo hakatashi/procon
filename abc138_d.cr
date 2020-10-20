@@ -10,6 +10,7 @@ q.times do
   p_, x = read_line.split.map(&.to_u64)
   counters[p_ - 1] += x
 end
+
 def search(node, sum, children, counters, rets)
   sum += counters[node]
   rets[node] = sum
@@ -17,5 +18,6 @@ def search(node, sum, children, counters, rets)
     search(child, sum, children, counters, rets)
   end
 end
+
 search(0_u64, 0_u64, children, counters, rets)
 puts rets.join(" ")

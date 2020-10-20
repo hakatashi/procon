@@ -21,7 +21,7 @@ ret = 0
     f = fs[j]
     xs = xss[j]
     if f == 1
-      if xs.all? {|(x, y)| fs[x - 1] == y}
+      if xs.all? { |(x, y)| fs[x - 1] == y }
         ans += 1
       else
         fail = 1

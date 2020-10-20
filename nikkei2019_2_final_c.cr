@@ -394,10 +394,10 @@ class PriorityQueue(T)
     index = 0
     while index * 2 + 1 < @heap.size
       child = if index * 2 + 2 < @heap.size && @priority_proc.call(@heap[index * 2 + 1]) < @priority_proc.call(@heap[index * 2 + 2])
-        index * 2 + 2
-      else
-        index * 2 + 1
-      end
+                index * 2 + 2
+              else
+                index * 2 + 1
+              end
       if @priority_proc.call(@heap[index]) >= @priority_proc.call(@heap[child])
         break
       end
@@ -500,7 +500,7 @@ ans = 0_i64
   max(0, -i).upto(min(h - 1, h - i - 1)).each do |y|
     x = i + y
     left = lefts[x][y]
-    index = sorted_lefts.bsearch_index {|left2| left2 >= a} .not_nil!.to_i64
+    index = sorted_lefts.bsearch_index { |left2| left2 >= a }.not_nil!.to_i64
     rights.unshift(index)
     sorted_ais.insert(index, a)
   end

@@ -14,7 +14,7 @@ else
   temp2 = ps[ps[un] - 1]
   ps[ps[un] - 1] = temp1
   ps[un] = temp2
-  if ps.each_cons(2).all? {|con| con[0] < con[1]}
+  if ps.each_cons(2).all? { |con| con[0] < con[1] }
     puts "YES"
   else
     puts "NO"

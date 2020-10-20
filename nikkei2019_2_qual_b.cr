@@ -22,7 +22,7 @@ if ds.size == 1
   exit
 end
 counts = Hash(UInt64, UInt64).new(0_u64, nil)
-ds.each {|d| counts[d] += 1}
+ds.each { |d| counts[d] += 1 }
 ret = 1_u64
 (0..ds.max).each_cons(2) do |(a, b)|
   ret = (ret * pow(counts[a]? || 0_u64, counts[b]? || 0_u64)) % 998244353_u64

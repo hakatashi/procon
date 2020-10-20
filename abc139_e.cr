@@ -51,7 +51,7 @@ while matches.size > 0
   ret += 1
 end
 
-if aiss.any? {|ais| ais.size > 0}
+if aiss.any? { |ais| ais.size > 0 }
   puts "-1"
 else
   puts ret

@@ -4,7 +4,7 @@ end
 
 n = read_line.to_i64
 ais = read_line.split.map(&.to_i64)
-vals = ais.map_with_index {|a, loc| {loc.to_i64, a}}.sort_by! {|(loc, a)| a}.reverse!
+vals = ais.map_with_index { |a, loc| {loc.to_i64, a} }.sort_by! { |(loc, a)| a }.reverse!
 dp = Array(Array(Int64)).new(n + 1) { Array(Int64).new(n + 1, 0_i64) }
 vals.each_with_index do |(loc, a), i|
   remains = vals.size.to_i64 - i

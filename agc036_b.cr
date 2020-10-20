@@ -14,7 +14,7 @@ list = [0_u64]
 markers = [0_u64]
 loop do
   indices = indices_list[ais[i]]
-  next_index = indices.bsearch {|ni| ni > i}
+  next_index = indices.bsearch { |ni| ni > i }
   if next_index.nil?
     next_index = indices[0]
     markers << list.size.to_u64
@@ -28,7 +28,7 @@ ret = [] of UInt64
 i2 = start_point
 while i2 < ais.size
   indices = indices_list[ais[i2]]
-  next_index = indices.bsearch {|ni| ni > i2}
+  next_index = indices.bsearch { |ni| ni > i2 }
   if next_index.nil?
     ret << ais[i2]
     i2 += 1

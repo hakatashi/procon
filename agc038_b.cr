@@ -343,7 +343,6 @@ class RedBlackTree
   end
 end
 
-
 n, k = read_line.split.map(&.to_u64)
 ps = read_line.split.map(&.to_u64)
 

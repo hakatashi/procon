@@ -13,7 +13,7 @@ m.times do
 end
 s = read_line.to_i64 - 1
 k = read_line.to_i64
-ts = read_line.split.map(&.to_i64).map {|town| town - 1}
+ts = read_line.split.map(&.to_i64).map { |town| town - 1 }
 
 dists = Array(Array(Int64)).new(k + 1) { Array(Int64).new(k, 0_i64) }
 

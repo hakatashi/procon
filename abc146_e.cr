@@ -14,7 +14,7 @@ end
 ret = 0_i64
 map.each do |kk, v|
   v.each_with_index do |n, j|
-    i = v.bsearch_index {|a| n - a < k}
+    i = v.bsearch_index { |a| n - a < k }
     ret += j - i.not_nil!
   end
 end

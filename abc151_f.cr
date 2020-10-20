@@ -22,7 +22,7 @@ ans = 20000.to_f64
     r = dist(ax, ay, bx, by) / 2.0
     px = (ax + bx) / 2.0
     py = (ay + by) / 2.0
-    if r < ans && points.all? {|(zx, zy)| dist(px, py, zx, zy) <= r + 0.000000001}
+    if r < ans && points.all? { |(zx, zy)| dist(px, py, zx, zy) <= r + 0.000000001 }
       ans = r
     end
   end
@@ -73,7 +73,7 @@ if n >= 3
 
         r = dist(px, py, a, b)
 
-        if r < ans && points.all? {|(zx, zy)| dist(px, py, zx, zy) <= r + 0.000000001}
+        if r < ans && points.all? { |(zx, zy)| dist(px, py, zx, zy) <= r + 0.000000001 }
           ans = r
         end
       end

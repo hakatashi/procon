@@ -42,7 +42,7 @@ prev_factors.each do |factor|
   factor_lens[factor] = ais.size.to_i64
 end
 
-gcd_all = ais.reduce {|a, b| a.gcd(b)}
+gcd_all = ais.reduce { |a, b| a.gcd(b) }
 
 ss.each do |s|
   gcd = s.gcd(gcd_all)

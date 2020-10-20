@@ -1,6 +1,6 @@
 gets
 ais = read_line.split.map(&.to_i64)
-xor = ais[2..].reduce(0_i64) {|a, b| a ^ b}
+xor = ais[2..].reduce(0_i64) { |a, b| a ^ b }
 a, b = ais[0], ais[1]
 sum = a + b
 carry = false

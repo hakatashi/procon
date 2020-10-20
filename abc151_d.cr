@@ -53,4 +53,3 @@ h.times do |y|
 end
 
 p ans
-

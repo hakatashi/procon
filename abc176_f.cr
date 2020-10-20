@@ -1,5 +1,5 @@
 n = read_line.to_i64
-ais = read_line.split.map {|a| a.to_i64 - 1 }
+ais = read_line.split.map { |a| a.to_i64 - 1 }
 dp0 = Array(Int64).new(n, 0_i64)
 dp1 = Array(Array(Int64)).new(n) { Array(Int64).new(n, -1_i64) }
 dp2 = Array(Hash(Tuple(Int64, Int64), Int64)).new(n) { Hash(Tuple(Int64, Int64), Int64).new(-1_i64) }

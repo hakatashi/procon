@@ -21,9 +21,9 @@ factors = factorize(n)
 factors2 = factorize(n - 1)
 ans = 0_i64
 
-f = factors.to_a.map {|(m, n)| (0..n).map {|i| m ** i}}
+f = factors.to_a.map { |(m, n)| (0..n).map { |i| m ** i } }
 Array.each_product(f) do |pr|
-  v = pr.reduce {|a, b| a * b}
+  v = pr.reduce { |a, b| a * b }
   next if v == 1
   cn = n
   while cn % v == 0
@@ -35,6 +35,6 @@ Array.each_product(f) do |pr|
 end
 
 if n > 2
-  ans += factors2.values.map {|i| i + 1} .reduce {|a, b| a * b} - 1
+  ans += factors2.values.map { |i| i + 1 }.reduce { |a, b| a * b } - 1
 end
 p ans

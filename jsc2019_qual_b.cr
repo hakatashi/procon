@@ -20,15 +20,14 @@ def invmod(e, et)
   x % et
 end
 
-
 MOD = 1000000007_i64
 
 n, k = read_line.split.map(&.to_u64)
 ais = read_line.split.map(&.to_u64)
 ret = 0_i64
 ais.each_with_index do |a, i|
-  smallers = ais.count {|a2| a2 < a}
-  right_smallers = ais[(i + 1)..-1].count {|a2| a2 < a}
+  smallers = ais.count { |a2| a2 < a }
+  right_smallers = ais[(i + 1)..-1].count { |a2| a2 < a }
   temp = (k * (k - 1)) % MOD
   temp = (temp * invmod(2_i64, 1000000007_i64)) % MOD
   temp = (temp * smallers) % MOD

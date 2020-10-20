@@ -1,13 +1,13 @@
 s = read_line
 k = read_line.to_u64
 
-chunks = s.chars.to_a.chunk(&.itself).map {|(c, s)| s.as(Array(Char))} .to_a
+chunks = s.chars.to_a.chunk(&.itself).map { |(c, s)| s.as(Array(Char)) }.to_a
 if chunks.size == 1
   puts s.size.to_u64 * k // 2
   exit
 end
 if k == 1_u64
-  puts chunks.map {|chunk| chunk.size.to_u64 // 2} .sum
+  puts chunks.map { |chunk| chunk.size.to_u64 // 2 }.sum
   exit
 end
 flag = false
@@ -18,7 +18,7 @@ if chunks.first[0] == chunks.last[0]
   chunks[0] += chunks.last
   chunks.pop
 end
-ret = chunks.map {|chunk| chunk.size.to_u64 // 2} .sum
+ret = chunks.map { |chunk| chunk.size.to_u64 // 2 }.sum
 if flag == false
   puts ret * k
 else

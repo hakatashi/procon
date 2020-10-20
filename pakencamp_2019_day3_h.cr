@@ -11,7 +11,6 @@ n.times do |y|
       enemies << {x, y}
     end
     if c == 'X'
-
     end
   end
   sss << ss

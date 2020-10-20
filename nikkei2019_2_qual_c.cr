@@ -3,7 +3,7 @@ ais = read_line.split.map(&.to_i)
 bs = read_line.split.map(&.to_i)
 sorted_as = ais.sort
 sorted_bs = bs.sort
-impossible = sorted_as.zip(sorted_bs).any? {|(a, b)| a > b}
+impossible = sorted_as.zip(sorted_bs).any? { |(a, b)| a > b }
 if impossible
   puts "No"
   exit

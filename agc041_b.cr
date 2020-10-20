@@ -16,7 +16,7 @@ ans = ais.bsearch_index do |a, i|
   elsif a + m <= ais[pe - 1]
     true
   else
-    s = ais.bsearch_index {|a2| a2 <= a + m}
+    s = ais.bsearch_index { |a2| a2 <= a + m }
     if s.nil? || s < pe - 1
       (pe - 1) * m + (i - (pe - 1)) * (a + m) - (sums[i] - sums[pe - 1]) + (n - i) * m <= m * v
     else

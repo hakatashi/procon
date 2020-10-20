@@ -39,7 +39,6 @@ class UnionFindTree
   end
 end
 
-
 n, m = read_line.split.map(&.to_i64)
 tree = UnionFindTree.new(n)
 m.times do

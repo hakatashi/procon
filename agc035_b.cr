@@ -14,6 +14,7 @@ edges = STDIN.gets_to_end.lines.each do |line|
   precedings[a] << b
   precedings[b] << a
 end
+
 def dfs(parent : UInt64, node : UInt64, visited : Set(UInt64), precedings : Hash(UInt64, Set(UInt64)))
   nodes = precedings[node]
   out = 0
@@ -38,5 +39,6 @@ def dfs(parent : UInt64, node : UInt64, visited : Set(UInt64), precedings : Hash
   end
   out % 2 == 0
 end
+
 visited = Set(UInt64).new
 data = dfs(0_u64, 1_u64, visited, precedings)

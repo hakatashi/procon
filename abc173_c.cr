@@ -16,7 +16,6 @@ ans = 0_i64
     end
     if cnt == k
       ans += 1
-
     end
   end
 end

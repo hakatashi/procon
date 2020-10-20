@@ -37,10 +37,10 @@ class PriorityQueue(T)
     index = 0
     while index * 2 + 1 < @heap.size
       child = if index * 2 + 2 < @heap.size && @heap[index * 2 + 1] < @heap[index * 2 + 2]
-        index * 2 + 2
-      else
-        index * 2 + 1
-      end
+                index * 2 + 2
+              else
+                index * 2 + 1
+              end
       if @heap[index] >= @heap[child]
         break
       end
@@ -52,8 +52,6 @@ class PriorityQueue(T)
 
   delegate :empty?, to: @heap
 end
-
-
 
 n, m = read_line.split.map(&.to_i)
 q = PriorityQueue(UInt32).new(n)

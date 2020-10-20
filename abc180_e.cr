@@ -2,7 +2,6 @@ def max(a, b)
   a > b ? a : b
 end
 
-
 n = read_line.to_i64
 cities = [] of Tuple(Int64, Int64, Int64)
 n.times do
@@ -49,4 +48,3 @@ tour.each do |d|
     end
   end
 end
-

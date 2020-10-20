@@ -12,6 +12,7 @@ STDIN.gets_to_end.lines.each do |line|
   tos[b - 1] << {a: a - 1, c: p - c}
 end
 real_edges = Array(NamedTuple(a: Int64, b: Int64, c: Int64)).new
+
 def search(node : Int64, tos : Hash(Int64, Array(NamedTuple(a: Int64, c: Int64))), visited : Set(Int64))
   visited << node
   edges = Array(NamedTuple(a: Int64, b: Int64, c: Int64)).new
@@ -22,11 +23,13 @@ def search(node : Int64, tos : Hash(Int64, Array(NamedTuple(a: Int64, c: Int64))
   end
   edges
 end
+
 visited = Set(Int64).new
 real_edges = search(n - 1, tos, visited)
 real_edges.each do |edge|
   froms[edge[:a]] << {b: edge[:b], c: edge[:c]}
 end
+
 def search2(node : Int64, froms : Hash(Int64, Array(NamedTuple(b: Int64, c: Int64))), visited : Set(Int64))
   visited << node
   edges = Array(NamedTuple(a: Int64, b: Int64, c: Int64)).new
@@ -37,6 +40,7 @@ def search2(node : Int64, froms : Hash(Int64, Array(NamedTuple(b: Int64, c: Int6
   end
   edges
 end
+
 visited2 = Set(Int64).new
 real_edges_2 = search2(0_i64, froms, visited2)
 d = Array(Int64).new(n, 10000000000_i64)
@@ -53,4 +57,3 @@ n.times do |i|
   end
 end
 puts [-d[n - 1], 0].max
-

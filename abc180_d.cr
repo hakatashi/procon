@@ -2,7 +2,6 @@ def product_overflow?(a, b)
   a.to_s(2).size + b.to_s(2).size > 64
 end
 
-
 x, y, a, b = read_line.split.map(&.to_i64)
 str = x
 ans = 0_i64

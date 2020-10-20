@@ -51,7 +51,7 @@ tokens.each do |token|
 end
 
 depth = 0_i64
-opens.sort_by! {|(close, open)| close}.each do |(close, open)|
+opens.sort_by! { |(close, open)| close }.each do |(close, open)|
   if close > depth
     puts "No"
     exit
@@ -59,13 +59,13 @@ opens.sort_by! {|(close, open)| close}.each do |(close, open)|
   depth += open - close
 end
 
-if evens.any? {|(close, open)| close > depth}
+if evens.any? { |(close, open)| close > depth }
   puts "No"
   exit
 end
 
 depth = 0_i64
-closes.sort_by! {|(close, open)| open}.each do |(close, open)|
+closes.sort_by! { |(close, open)| open }.each do |(close, open)|
   if open > depth
     puts "No"
     exit

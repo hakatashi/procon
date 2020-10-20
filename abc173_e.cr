@@ -152,12 +152,15 @@ record ModNum, value : Int64 do
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def <=(value)
     raise NotImplementedError.new("<=")
   end
+
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def >=(value)
     raise NotImplementedError.new(">=")
   end
@@ -166,13 +169,12 @@ record ModNum, value : Int64 do
   delegate inspect, to: @value
 end
 
-
 MOD = 1_000_000_007_i64
 n, k = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
 
 if n == k
-  ans = ais.map {|n| ModNum.new(n)}.reduce(ModNum.new(1_i64)) {|a, b| a * b}
+  ans = ais.map { |n| ModNum.new(n) }.reduce(ModNum.new(1_i64)) { |a, b| a * b }
   p ans
   exit
 end
@@ -193,7 +195,7 @@ end
 poss.sort!.reverse!
 negs.sort!
 if zeros.size == 0 && poss.size == 0 && k.odd?
-  ans = negs.reverse![...k].map {|n| ModNum.new(n)}.reduce(ModNum.new(1_i64)) {|a, b| a * b}
+  ans = negs.reverse![...k].map { |n| ModNum.new(n) }.reduce(ModNum.new(1_i64)) { |a, b| a * b }
   p ans
   exit
 end

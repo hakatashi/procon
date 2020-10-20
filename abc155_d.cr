@@ -13,7 +13,7 @@ read_line.split.map do |ra|
   end
 end
 positives.sort!
-negatives.sort_by! {|a| a.abs}
+negatives.sort_by! { |a| a.abs }
 
 # iより小さいかiと等しい個数がk個より多いかk個ならtrueを返すこと
 ans = (-1_000_000_000_000_000_000_i64..1_000_000_000_000_000_000_i64).bsearch do |i|

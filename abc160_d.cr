@@ -1,6 +1,7 @@
 def min(a, b)
   a > b ? b : a
 end
+
 n, x, y = read_line.split.map(&.to_i64)
 x -= 1
 y -= 1

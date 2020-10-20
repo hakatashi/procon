@@ -5,6 +5,7 @@ class Dfs
     @cnt = 0_i64
     dfs(1_i64, 0_i64)
   end
+
   def dfs(len, acc)
     if len == 11
       @cnt += 1

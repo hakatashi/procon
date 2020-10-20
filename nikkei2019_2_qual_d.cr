@@ -5,7 +5,7 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
-    initialize(values) {|a, b| a > b ? a : b}
+    initialize(values) { |a, b| a > b ? a : b }
   end
 
   def initialize(values : Array(T), &block : T, T -> T)
@@ -83,7 +83,6 @@ class SegmentTree(T)
   end
 end
 
-
 INF = 100000000000000_u64
 
 n, m = read_line.split.map(&.to_i)
@@ -92,21 +91,21 @@ m.times do
   l, r, c = read_line.split.map(&.to_i)
   bars << {l, r, c}
 end
-unless bars.any? {|(l, r, c)| r == n}
+unless bars.any? { |(l, r, c)| r == n }
   p -1
   exit
 end
 r_to_index = Hash(Int32, Int32).new
-uniq_rs = (bars.map {|(l, r, c)| r} + [1]).uniq.sort
+uniq_rs = (bars.map { |(l, r, c)| r } + [1]).uniq.sort
 uniq_rs.each_with_index do |r, i|
   r_to_index[r] = i
 end
-segtree = SegmentTree.new(Array(UInt64).new(uniq_rs.size + 1, INF)) {|a, b| a < b ? a : b}
+segtree = SegmentTree.new(Array(UInt64).new(uniq_rs.size + 1, INF)) { |a, b| a < b ? a : b }
 segtree[0] = 0_u64
 
-bars.sort_by {|(l, r, c)| r}.each do |(l, r, c)|
+bars.sort_by { |(l, r, c)| r }.each do |(l, r, c)|
   to = r_to_index[r]
-  from = uniq_rs.bsearch_index {|r| r >= l}.not_nil!
+  from = uniq_rs.bsearch_index { |r| r >= l }.not_nil!
   if from == to
     next
   end

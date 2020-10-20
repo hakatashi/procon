@@ -4,8 +4,8 @@ t.times do
   ans = [] of Int64
   ret = 0_i64
   "atcoder".chars.each_with_index do |c, i|
-    j = s.index {|sc| sc >= c}
-    k = s.index {|sc| sc > c}
+    j = s.index { |sc| sc >= c }
+    k = s.index { |sc| sc > c }
     if j.nil?
       ret = -1_i64
       break

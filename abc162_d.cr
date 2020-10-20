@@ -9,4 +9,3 @@ s.each_with_index do |c, i|
   end
 end
 p ans
-

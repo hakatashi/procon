@@ -2,6 +2,7 @@
 
 n = read_line.to_i
 r = Array.new(n) { Array.new(n, 0) }
+
 def colorize(lower, upper, depth, r)
   size = upper - lower
   left = size // 2
@@ -20,6 +21,7 @@ def colorize(lower, upper, depth, r)
     end
   end
 end
+
 colorize(0, n, 1, r)
 n.times do |i|
   vs = (n - i - 1).times.to_a.map do |j|

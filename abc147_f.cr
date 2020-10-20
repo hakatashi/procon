@@ -28,7 +28,7 @@ infoss = Array.new(interval) { [] of Tuple(Symbol, Int64) }
 end
 ret = 0_i64
 infoss.each do |infos|
-  infos.sort_by! {|(type, v)| v * 2_i64 + (type == :close ? 1_i64 : 0_i64)}
+  infos.sort_by! { |(type, v)| v * 2_i64 + (type == :close ? 1_i64 : 0_i64) }
   depth = 0_i64
   open = 0_i64
   infos.each do |(type, v)|

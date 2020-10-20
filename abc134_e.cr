@@ -5,7 +5,7 @@ ais.each do |a|
   if maxes.size == 0 || maxes.last >= a
     maxes << a
   else
-    i = maxes.bsearch_index {|max| max < a}
+    i = maxes.bsearch_index { |max| max < a }
     unless i.nil?
       maxes[i] = a
     end

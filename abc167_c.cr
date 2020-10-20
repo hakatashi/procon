@@ -11,14 +11,14 @@ ans = INF
 Array.each_product([[true, false]] * n) do |pattern|
   a_sums = Array(Int64).new(m, 0_i64)
   c_sum = 0_i64
-  books.each.with_index.select {|(book, i)| pattern[i]}.each do |(book, i)|
+  books.each.with_index.select { |(book, i)| pattern[i] }.each do |(book, i)|
     c, ais = book
     ais.each_with_index do |a, i|
       a_sums[i] += a
     end
     c_sum += c
   end
-  if a_sums.all? {|a| a >= x}
+  if a_sums.all? { |a| a >= x }
     if c_sum < ans
       ans = c_sum
     end

@@ -15,7 +15,7 @@ gets
 ais = read_line.split.map(&.to_i64)
 ans = 0_i64
 60.times do |i|
-  bits = ais.map {|a| (a >> i) & 1} .sum
+  bits = ais.map { |a| (a >> i) & 1 }.sum
   ret = (bits.as(Int64) * (ais.size - bits.as(Int64))) % 1000000007_i64
   ret = (ret * pow(2_i64, i)) % 1000000007_i64
   ans = (ans + ret) % 1000000007_i64

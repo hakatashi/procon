@@ -39,7 +39,6 @@ class UnionFindTree
   end
 end
 
-
 n, m = read_line.split.map(&.to_i)
 queries = Array(Tuple(Int32, Int32)).new(m)
 m.times do

@@ -152,12 +152,15 @@ record ModNum, value : Int64 do
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def <=(value)
     raise NotImplementedError.new("<=")
   end
+
   def <(value)
     raise NotImplementedError.new("<")
   end
+
   def >=(value)
     raise NotImplementedError.new(">=")
   end
@@ -191,7 +194,7 @@ end
   end
 end
 
-dp = { 
+dp = {
   Array(ModNum).new(n + 1, ModNum.new(0_i64)),
   Array(ModNum).new(n + 1, ModNum.new(0_i64)),
 }

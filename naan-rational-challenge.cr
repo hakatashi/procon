@@ -27,14 +27,14 @@ dp2 = Set(BigRational).new(10000000)
 dp2 << BigRational.new(1, 1)
 
 # target = BigRational.new(1, 1) - BigRational.new(1, 76) - BigRational.new(1, 75) - BigRational.new(1, 72) - BigRational.new(1, 63) - BigRational.new(1, 60) - BigRational.new(1, 57) - BigRational.new(1, 56) - BigRational.new(1, 54) - BigRational.new(1, 50) - BigRational.new(1, 45) - BigRational.new(1, 42) - BigRational.new(1, 40) - BigRational.new(1, 36) - BigRational.new(1, 35) - BigRational.new(1, 30) - BigRational.new(1, 27) - BigRational.new(1, 24) - BigRational.new(1, 20) - BigRational.new(1, 19) - BigRational.new(1, 15) - BigRational.new(1, 12) - BigRational.new(1, 9) - BigRational.new(1, 4)
-candidates = (2..100).to_a.reject {|n| is_prime(n) && n >= 50}
+candidates = (2..100).to_a.reject { |n| is_prime(n) && n >= 50 }
 
 max_counts1 = Hash(BigRational, Int32).new(0)
-counts1 = Hash(BigRational, Array(Tuple(Int32, Int32))).new {|h, k| h[k] = [] of Tuple(Int32, Int32)}
+counts1 = Hash(BigRational, Array(Tuple(Int32, Int32))).new { |h, k| h[k] = [] of Tuple(Int32, Int32) }
 counts1[BigRational.new(0, 1)] << {0, 0}
 
 max_counts2 = Hash(BigRational, Int32).new(0)
-counts2 = Hash(BigRational, Array(Tuple(Int32, Int32))).new {|h, k| h[k] = [] of Tuple(Int32, Int32)}
+counts2 = Hash(BigRational, Array(Tuple(Int32, Int32))).new { |h, k| h[k] = [] of Tuple(Int32, Int32) }
 counts2[BigRational.new(1, 1)] << {0, 0}
 
 candidates_half1 = candidates[0...(candidates.size // 2)]
@@ -83,7 +83,7 @@ denominators = [] of Int32
 current_r = max
 current_count = max_counts1[max]
 until current_count == 0
-  latest, count = counts1[current_r].find {|(latest, count)| count == current_count && (denominators.empty? || latest != denominators.last)} .not_nil!
+  latest, count = counts1[current_r].find { |(latest, count)| count == current_count && (denominators.empty? || latest != denominators.last) }.not_nil!
   current_r -= BigRational.new(1, latest)
   denominators << latest
   current_count -= 1
@@ -92,10 +92,10 @@ end
 current_r = max
 current_count = max_counts2[max]
 until current_count == 0
-  latest, count = counts2[current_r].find {|(latest, count)| count == current_count && (denominators.empty? || latest != denominators.last)} .not_nil!
+  latest, count = counts2[current_r].find { |(latest, count)| count == current_count && (denominators.empty? || latest != denominators.last) }.not_nil!
   current_r += BigRational.new(1, latest)
   denominators << latest
   current_count -= 1
 end
 
-p denominators.sort.map {|d| "1/#{d}"} .join(" + ") + " = 1"
+p denominators.sort.map { |d| "1/#{d}" }.join(" + ") + " = 1"

@@ -3,6 +3,7 @@
 def min(a, b, c, d)
   min(a, min(b, min(c, d)))
 end
+
 def min(a, b)
   a > b ? b : a
 end

@@ -1,9 +1,11 @@
 def min(a, b)
   a > b ? b : a
 end
+
 def max(a, b)
   a < b ? b : a
 end
+
 def clamp(a, b, c)
   max(a, min(b, c))
 end

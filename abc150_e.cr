@@ -1,4 +1,5 @@
 MOD = 1000000007_i64
+
 def pow(b, e)
   ret = 1_u64
   while e > 0

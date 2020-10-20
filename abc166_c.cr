@@ -7,6 +7,6 @@ m.times do
   pres[b - 1] << a - 1
 end
 ans = pres.each.with_index.count do |nodes, i|
-  nodes.all? {|node| hs[node] < hs[i]}
+  nodes.all? { |node| hs[node] < hs[i] }
 end
 p ans

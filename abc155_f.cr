@@ -16,7 +16,7 @@ m.times do |i|
   code_ends << {r + 1, i.to_i64, false}
 end
 
-bombs.sort_by! {|(a, b)| a}
+bombs.sort_by! { |(a, b)| a }
 
 odds = Array(Bool).new(bombs.size + 1, false)
 prev = false
@@ -34,7 +34,7 @@ if parity
 end
 
 edges = Array(Array(Int64)).new(codes.size) { [-1_i64, -1_i64] }
-code_ends.sort_by! {|(x, i, type)| x}
+code_ends.sort_by! { |(x, i, type)| x }
 bombs.each_with_index do |(a, b), i|
   until code_ends.empty? || code_ends[0][0] > a
     x, code_index, type = code_ends.shift

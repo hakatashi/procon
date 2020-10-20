@@ -9,6 +9,7 @@ edge_colors = Array.new(n - 1) { 0 }
   precedings[b - 1] << {a - 1, i}
 end
 k = precedings.max_of(&.size)
+
 def dfs(node, precedings, prev, prev_color, edges, k, edge_colors)
   color = 1
   color += 1 if color == prev_color
@@ -20,6 +21,7 @@ def dfs(node, precedings, prev, prev_color, edges, k, edge_colors)
     color += 1 if color == prev_color
   end
 end
+
 dfs(0, precedings, 0, 0, edges, k, edge_colors)
 p k
 edge_colors.each do |color|

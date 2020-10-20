@@ -6,7 +6,6 @@ def factorize(n)
       n = n // i
       h[i] += 1
     else
-
       i += 1
     end
   end
@@ -15,8 +14,6 @@ def factorize(n)
   end
   h
 end
-
-
 
 n = read_line.to_i64
 ais = read_line.split.map(&.to_i64)
@@ -31,9 +28,9 @@ ais.each_with_index do |a, i|
     end
   else
     factors = factorize(a)
-    f = factors.to_a.map {|(m, n)| (0_i64..n).map {|i| m ** i}}
+    f = factors.to_a.map { |(m, n)| (0_i64..n).map { |i| m ** i } }
     Array.each_product(f) do |pr|
-      if dp[pr.reduce {|a, b| a * b}] == true
+      if dp[pr.reduce { |a, b| a * b }] == true
         ok[i] = false
         break
       end
@@ -51,9 +48,9 @@ ais.reverse_each.with_index do |a, ri|
     end
   else
     factors = factorize(a)
-    f = factors.to_a.map {|(m, n)| (0_i64..n).map {|i| m ** i}}
+    f = factors.to_a.map { |(m, n)| (0_i64..n).map { |i| m ** i } }
     Array.each_product(f) do |pr|
-      if dp[pr.reduce {|a, b| a * b}] == true
+      if dp[pr.reduce { |a, b| a * b }] == true
         ok[i] = false
         break
       end

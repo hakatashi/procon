@@ -10,4 +10,4 @@ ais.each_with_index do |a, i|
     left[i - a] += 1
   end
 end
-p left.zip(right).sum {|(l, r)| l * r}
+p left.zip(right).sum { |(l, r)| l * r }

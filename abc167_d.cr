@@ -1,5 +1,5 @@
 n, k = read_line.split.map(&.to_i64)
-ais = read_line.split.map(&.to_i64).map {|a| a - 1}
+ais = read_line.split.map(&.to_i64).map { |a| a - 1 }
 history = Array(Int64).new(n)
 history << 0_i64
 visited = Set(Int64).new

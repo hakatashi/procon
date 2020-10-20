@@ -8,6 +8,7 @@ def factors(n)
   end
   ret.uniq
 end
+
 gets
 ais = STDIN.gets_to_end.split.map(&.to_u64)
 balls = Array(UInt64).new(ais.size + 1, 0_u64)

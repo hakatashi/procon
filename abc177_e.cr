@@ -15,7 +15,6 @@ def factorize(n)
   end
 end
 
-
 gets
 ais = read_line.split.map(&.to_i64)
 lcm = Set(Int64).new
@@ -31,7 +30,7 @@ ais.each do |a|
 end
 if is_pairwise_coprime
   puts "pairwise coprime"
-elsif ais.reduce {|a, b| a.gcd(b)} == 1
+elsif ais.reduce { |a, b| a.gcd(b) } == 1
   puts "setwise coprime"
 else
   puts "not coprime"

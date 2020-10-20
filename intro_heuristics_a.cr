@@ -11,7 +11,7 @@ max = [] of Int64
 maxans = 0_i64
 last = cs.map { 0_i64 }
 d.times do |i|
-  base = last.map_with_index {|l, j| -cs[j] * (i - l + 1)} .sum
+  base = last.map_with_index { |l, j| -cs[j] * (i - l + 1) }.sum
   best = base
   best_choice = 0_i64
   last.each_with_index do |l, j|

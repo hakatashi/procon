@@ -6,7 +6,6 @@ def factorize(n)
       n = n // i
       h[i] += 1
     else
-
       i += 1
     end
   end
@@ -16,17 +15,16 @@ def factorize(n)
   h
 end
 
-
 n = read_line.to_i64
 if n == 1
   p 1
   exit
 end
 factors = factorize(n)
-f = factors.to_a.map {|(m, n)| (0_i64..n).map {|i| m ** i}}
+f = factors.to_a.map { |(m, n)| (0_i64..n).map { |i| m ** i } }
 ans = [] of Int64
 Array.each_product(f) do |pr|
-  ans << pr.reduce {|a, b| a * b}
+  ans << pr.reduce { |a, b| a * b }
 end
 ans.sort!
 ans.each do |a|

@@ -23,7 +23,7 @@ counts.each do |c|
     vs << n
   end
 end
-if vs.reduce {|a, b| a ^ b} == 0
+if vs.reduce { |a, b| a ^ b } == 0
   puts "Yes"
 else
   puts "No"

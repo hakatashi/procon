@@ -1,12 +1,15 @@
 def max(a, b)
   a > b ? a : b
 end
+
 def max(a, b, c)
   max(a, max(b, c))
 end
+
 def max(a, b, c, d)
   max(a, max(b, max(c, d)))
 end
+
 def max(a, b, c, d, e)
   max(a, max(b, max(c, max(d, e))))
 end

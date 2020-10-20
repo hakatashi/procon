@@ -30,9 +30,9 @@ barriers = Hash(XY, Set(XY)).new(w * h) do |h, k|
 end
 
 vers.each do |(a, b, c)|
-  ai = ys.bsearch_index {|y| y >= a}.not_nil!.to_i64
-  bi = ys.bsearch_index {|y| y >= b}.not_nil!.to_i64
-  ci = xs.bsearch_index {|x| x >= c}.not_nil!.to_i64
+  ai = ys.bsearch_index { |y| y >= a }.not_nil!.to_i64
+  bi = ys.bsearch_index { |y| y >= b }.not_nil!.to_i64
+  ci = xs.bsearch_index { |x| x >= c }.not_nil!.to_i64
   (ai + 1).upto(bi) do |yi|
     barriers[{ci, yi}] << {ci + 1, yi}
     barriers[{ci + 1, yi}] << {ci, yi}
@@ -40,17 +40,17 @@ vers.each do |(a, b, c)|
 end
 
 hors.each do |(d, e, f)|
-  di = ys.bsearch_index {|y| y >= d}.not_nil!.to_i64
-  ei = xs.bsearch_index {|x| x >= e}.not_nil!.to_i64
-  fi = xs.bsearch_index {|x| x >= f}.not_nil!.to_i64
+  di = ys.bsearch_index { |y| y >= d }.not_nil!.to_i64
+  ei = xs.bsearch_index { |x| x >= e }.not_nil!.to_i64
+  fi = xs.bsearch_index { |x| x >= f }.not_nil!.to_i64
   (ei + 1).upto(fi) do |xi|
     barriers[{xi, di}] << {xi, di + 1}
     barriers[{xi, di + 1}] << {xi, di}
   end
 end
 
-startx = xs.bsearch_index {|x| x > 0}
-starty = ys.bsearch_index {|y| y > 0}
+startx = xs.bsearch_index { |x| x > 0 }
+starty = ys.bsearch_index { |y| y > 0 }
 
 if startx.nil? || starty.nil?
   puts "INF"
@@ -64,6 +64,7 @@ queue << start
 visited = Set(XY).new
 visited << start
 ans = 0_i64
+
 macro go(condition, cell)
   if {{condition}} && !visited.includes?({{cell}}) && !barriers[{x, y}].includes?({{cell}})
     queue << {{cell}}

@@ -1,5 +1,6 @@
 n = read_line.to_i64
 ans = [] of String
+
 def dfs(prefix, head, length)
   if length == 0
     puts prefix
@@ -11,4 +12,5 @@ def dfs(prefix, head, length)
     dfs(prefix + ('a' + head), head + 1, length - 1)
   end
 end
+
 dfs("", 0, n)

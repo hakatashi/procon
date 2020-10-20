@@ -8,6 +8,7 @@ STDIN.gets_to_end.lines.each do |l|
   adjs[a - 1] << b - 1
   adjs[b - 1] << a - 1
 end
+
 def search_by(node : Int32, parent : Int32, depth : Int32, adjs : Array(Set(Int32)), k : Int64)
   ret = 1_i64
   if depth >= 1
@@ -28,4 +29,5 @@ def search_by(node : Int32, parent : Int32, depth : Int32, adjs : Array(Set(Int3
   end
   return ret
 end
+
 puts (search_by(0, -1, 0, adjs, k) * k) % 1000000007

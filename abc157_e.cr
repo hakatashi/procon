@@ -5,7 +5,7 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
-    initialize(values) {|a, b| a > b ? a : b}
+    initialize(values) { |a, b| a > b ? a : b }
   end
 
   def initialize(values : Array(T))
@@ -113,7 +113,7 @@ q.times do
   queries << {type, a, b}
 end
 
-tree = SegmentTree(Int64).new(s.map {|c| 1_i64 << (c.ord - 97)})
+tree = SegmentTree(Int64).new(s.map { |c| 1_i64 << (c.ord - 97) })
 
 queries.each do |(type, a, b)|
   if type == "1"

@@ -1,7 +1,7 @@
 n, m = read_line.split.map(&.to_u64)
 ais = [] of UInt64
 css = [] of Array(UInt64)
-m.times do 
+m.times do
   a, b = read_line.split.map(&.to_u64)
   ais << a
   cs = read_line.split.map(&.to_u64)

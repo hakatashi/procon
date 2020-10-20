@@ -10,5 +10,5 @@ n.times do
     blues << x
   end
 end
-reds.sort!.each {|red| p red}
-blues.sort!.each {|blue| p blue}
+reds.sort!.each { |red| p red }
+blues.sort!.each { |blue| p blue }

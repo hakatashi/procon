@@ -8,4 +8,3 @@ elsif c == a && a != b
 else
   puts "No"
 end
-

@@ -12,7 +12,6 @@ def extended_gcd(a, b)
   last_remainder
 end
 
-
 gets
 ais = read_line.split.map(&.to_i64)
 left_gcds = [] of Int64

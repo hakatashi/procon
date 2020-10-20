@@ -366,7 +366,7 @@ class SegmentTree(T)
   property values : Array(T)
 
   def initialize(values : Array(T))
-    initialize(values) {|a, b| a > b ? a : b}
+    initialize(values) { |a, b| a > b ? a : b }
   end
 
   def initialize(values : Array(T), &block : T, T -> T)
@@ -462,7 +462,6 @@ class SegmentTree(T)
   end
 end
 
-
 INF = Int32::MAX
 n, q = read_line.split.map(&.to_i64)
 trees = Array(RedBlackTree).new(200_000) { RedBlackTree.new }
@@ -479,5 +478,5 @@ segs = trees.map do |tree|
     tree.max
   end
 end
-t = SegmentTree(Int32).new(segs) {|a, b| a > b ? b : a}
+t = SegmentTree(Int32).new(segs) { |a, b| a > b ? b : a }
 p t

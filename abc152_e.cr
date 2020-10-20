@@ -23,7 +23,7 @@ end
 
 gets
 ais = read_line.split.map(&.to_big_i)
-lcm = (ais.reduce {|a, b| a.lcm(b)} % MOD).to_i64
+lcm = (ais.reduce { |a, b| a.lcm(b) } % MOD).to_i64
 ans = 0_i64
 ais.each do |a|
   tmp = (lcm * invmod(a)) % MOD
