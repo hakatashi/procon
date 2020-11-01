@@ -5,6 +5,7 @@ else
   output="$1"; shift
 fi
 
+dos2unix $filename
 if [ "${filename##*.}" = "cpp" ]; then
   if [ "$filename" -nt "${output}" ]; then
     echo "Building C++ project ${filename}..."
