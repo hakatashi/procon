@@ -9,6 +9,10 @@ else
 fi
 TEST_DIR="tests/$task"
 
+if [[ "$task" == yukicoder_* ]]; then
+  task="${task#"yukicoder_"}"
+fi
+
 if [ -x ~/.pyenv/shims/oj ]; then
   OJ=~/.pyenv/shims/oj
 elif [ -x ~/.local/bin/oj ]; then
@@ -23,7 +27,11 @@ echo "task id: $task"
 if [ ! -d "${TEST_DIR}" ]; then
   echo "Directory ${TEST_DIR} not exists. Downloading..."
   mkdir -p "${TEST_DIR}"
-  $OJ download "https://atcoder.jp/contests/${contest}/tasks/${task}" --directory "${TEST_DIR}"
+  if [ $contest == "yukicoder" ]; then
+    $OJ download "https://yukicoder.me/problems/no/${task}" --directory "${TEST_DIR}"
+  else
+    $OJ download "https://atcoder.jp/contests/${contest}/tasks/${task}" --directory "${TEST_DIR}"
+  fi
 fi
 
 ./.vscode/build.sh "$filename" || exit 1
@@ -33,8 +41,6 @@ if grep -q -i 'mode: float' "$filename"; then
   echo "Setting testing mode to float..."
   TESTFLAGS+=" --error 0.000001"
 fi
-
-TEST_DIR="tests/$task"
 
 if [ "$ext" == "cr" ] || [ "$ext" == "cpp" ]; then
   if [ -d /usr/local/share/crystal-0.33.0-1 ] || [ -d /tmp/crystal-0.33.0-1 ]; then
