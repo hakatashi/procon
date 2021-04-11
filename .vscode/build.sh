@@ -10,7 +10,7 @@ if [ "${filename##*.}" = "cpp" ]; then
   if [ "$filename" -nt "${output}" ]; then
     echo "Building C++ project ${filename}..."
     mkdir -p bin
-    g++ "$filename" -O2 -lm -o "${output}" $@
+    g++ "$filename" -std=gnu++17 -lm -g -o "${output}" $@ || exit 1
   fi
 elif [ "${filename##*.}" = "cr" ]; then
   if [ "$filename" -nt "${output}" ]; then

@@ -37,7 +37,7 @@ fi
 export BROWSER="/mnt/c/Program Files/Firefox Developer Edition/firefox.exe"
 
 if [ "${filename##*.}" = "cpp" ]; then
-  $OJ submit "${task_url}" "${filename}" --no-guess --language C++14 --yes
+  $OJ submit "${task_url}" "${filename}" --no-guess --language "C++ (GCC 9.2.1)" --yes
 elif [ "${filename##*.}" = "cr" ]; then
   $OJ submit "${task_url}" "${filename}" --no-guess --language Crystal --yes
 elif [ "${filename##*.}" = "vim" ]; then

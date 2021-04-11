@@ -1,0 +1,46 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug C++",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+      "preLaunchTask": "Build",
+      "args": [
+        "<",
+        "${workspaceFolder}/tests/${fileBasenameNoExtension}/${input:sample-no}"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "sample-no",
+      "type": "pickString",
+      "description": "Sample to run",
+      "options": [
+        "sample-1.in",
+        "sample-2.in",
+        "sample-3.in",
+        "sample-4.in",
+        "sample-5.in"
+      ],
+      "default": "sample-1.in"
+    }
+  ]
+}
