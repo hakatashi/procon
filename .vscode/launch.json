@@ -26,6 +26,18 @@
           "ignoreFailures": true
         }
       ]
+    },
+    {
+      "name": "Debug Crystal",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build (debug)",
+      "args": [
+        "<",
+        "${workspaceFolder}/tests/${fileBasenameNoExtension}/${input:sample-no}"
+      ],
     }
   ],
   "inputs": [

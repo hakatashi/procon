@@ -70,6 +70,30 @@
         "reveal": "silent"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Build (debug)",
+      "type": "shell",
+      "command": "./.vscode/build.sh",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\wsl.exe"
+          }
+        }
+      },
+      "args": [
+        "${fileBasename}",
+        "--debug"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
