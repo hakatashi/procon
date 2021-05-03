@@ -107,7 +107,7 @@ class Dijkstra
     @prever = Array(Int64).new(@n, -1_i64)
     @dist[s] = 0_i64
 
-    queue = AtCoder::PriorityQueue(Tuple(Int64, Int64)).new {|(d, v)| d}
+    queue = AtCoder::PriorityQueue(Tuple(Int64, Int64)).new {|(d, v)| -d}
     queue << {0_i64, s}
 
     until queue.empty?
